@@ -6,13 +6,15 @@ function [RETURN_CODE,PROCESS_STATUS]=GET_PROCESS_STATUS (PROCESS_ID)
         global RETURN_CODE_TYPE;
         global PROCESS_STATUS;
         global Process_Set;
+        global MAX_NUMBER_OF_PROCESS;
+
 		if INVALID_ID(PROCESS_ID) == 0
             RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
 			return;
         end
         i=0;
         
-        for i = 1:255
+        for i = 1:MAX_NUMBER_OF_PROCESS 
             if  isempty( Process_Set{1,i} ) == 0 && Process_Set{1,i}.ID == PROCESS_ID
                 PROCESS_STATUS.DEADLINE_TIME = Process_Set{1,i}.DEADLINE_TIME;
                 PROCESS_STATUS.CURRENT_PRIORITY = Process_Set{1,i}.CURRENT_PRIORITY;

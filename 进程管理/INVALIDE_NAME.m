@@ -6,10 +6,12 @@
 
 function [flag] = INVALIDE_NAME(STR)
 %PROCESS_ATTRIBUTE_TYPE.NAME='pkb';
-global Process_NAME_Set;
+
 global Process_Set;
+global MAX_NUMBER_OF_PROCESS
+
 flag=0;
-for i=1:255
+for i=1:MAX_NUMBER_OF_PROCESS 
 %      x = Process_Set{1,i}.NAME
 % Process_NAME_Set{1,i}
     if isempty(Process_Set{1,i}) == 0
