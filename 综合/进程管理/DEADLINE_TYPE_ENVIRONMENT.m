@@ -1,0 +1,5 @@
+global DEADLINE_TYPE
+DEADLINE_TYPE.SOFT = 0;
+DEADLINE_TYPE.HARD = 1;
+          
+

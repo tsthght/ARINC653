@@ -1,0 +1,1 @@
+BUF = BUFFER_TYPE('pkb',1,1,1,1,1,1)

@@ -1,0 +1,13 @@
+function [BUFFER_NAME] = FIND_BUFFER_NAME(STR)
+global Waiting_Buffer_Set
+ans = -1;
+for i = 1:8
+    for j = 1:255
+           if strcmp( STR , Waiting_Buffer_Set{i,j}.NAME ) == 1
+           ans = STR;
+        end
+    end
+end
+
+    
+        
