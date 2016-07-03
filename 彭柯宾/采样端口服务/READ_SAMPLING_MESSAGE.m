@@ -5,6 +5,9 @@ global RETURN_CODE_TYPE
 global SAMPLING_PORT_ATTRIBUTE	
 global EMPTY_INDICATOR_TYPE
 global PORT_DIRECTION_TYPE
+global Sampling_Set
+global SPORT
+global VALIDITY_TYPE
 
   		TEMP_LENGTH = 0;
   		
@@ -24,8 +27,9 @@ global PORT_DIRECTION_TYPE
     	
 %   		SPort = SAMPLING_PORT(SAMPLING_PORT_ATTRIBUTE.ID,SAMPLING_PORT_ATTRIBUTE.LAST_MSG_VALIDITY);
 	
-  		global SPORT
-  		if(SPORT.PORT_DIRECTION ~= PORT_DIRECTION_TYPE.DESTINATION)
+  		
+        Index = find_index(SAMPLING_PORT_ID);
+  		if(Sampling_Set{1,Index}.PORT_DIRECTION ~= PORT_DIRECTION_TYPE.DESTINATION)
     		
     		RETURN_CODE = RETURN_CODE_TYPE.INVALID_MODE;
     		return;
@@ -48,8 +52,8 @@ global PORT_DIRECTION_TYPE
   				TEMP_LENGTH = TEMP_LENGTH + 1;
             end
     	
-    		LENGTH = SPORT.LENGTH
-    		
+    		LENGTH = SPORT.LENGTH;
+    		VALIDITY = VALIDITY_TYPE.VALID;
 %     		if(age of the copied message is consistent with the required REFRESH_PERIOD
 % 				attribute of the port)
 %     		

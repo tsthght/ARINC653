@@ -1,9 +1,13 @@
 function [ SAMPLING_PORT_ID,RETURN_CODE ] = CREATE_SAMPLING_PORT(SAMPLING_PORT_NAME,REFRESH_PERIOD,MAX_MESSAGE_SIZE,PORT_DIRECTION)
 %CREATE_SAMPLING_PORT 此处显示有关此函数的摘要
 %   此处显示详细说明
-	global RETURN_CODE_TYPE
-    global SAMPLING_PORT_ATTRIBUTE
-
+	global RETURN_CODE_TYPE;
+    global SAMPLING_PORT_ATTRIBUTE;
+    global Current_Partition_STATUE;
+    global OPERATING_MODE_TYPE;
+    global MAX_NUMBER_OF_PROCESS;
+    
+  
 		if(INVALID_NAME(SAMPLING_PORT_NAME))
   		    
 			RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
@@ -11,7 +15,7 @@ function [ SAMPLING_PORT_ID,RETURN_CODE ] = CREATE_SAMPLING_PORT(SAMPLING_PORT_N
         end
         
 		if(INVALID_MAX_MESSAGE_SIZE(MAX_MESSAGE_SIZE)==0)
-		    fprintf('sadsa');
+		   
 			RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
     		return;
         end
@@ -37,47 +41,50 @@ function [ SAMPLING_PORT_ID,RETURN_CODE ] = CREATE_SAMPLING_PORT(SAMPLING_PORT_N
     		return;
         end
         global SPortTable					
-%   		if(MAX_MESSAGE_SIZE ~= SPortTable.MAX_MESSAGE_SIZE)
-%    			
-%    			RETURN_CODE = RETURN_CODE_TYPE.INVALID_CONFIG;
-%    			return;
-%         end
+  		if(MAX_MESSAGE_SIZE ~= SPortTable.MAX_MESSAGE_SIZE)
+   			
+   			RETURN_CODE = RETURN_CODE_TYPE.INVALID_CONFIG;
+   			return;
+        end
         
-%    		if(PORT_DIRECTION ~= SPortTable.PORT_DIRECTION)
-%    			
-%    			RETURN_CODE = RETURN_CODE_TYPE.INVALID_CONFIG;
-%    			return;
-%         end
+   		if(PORT_DIRECTION ~= SPortTable.PORT_DIRECTION)
+   			
+   			RETURN_CODE = RETURN_CODE_TYPE.INVALID_CONFIG;
+   			return;
+        end
         
-%    		if(SAMPLING_PORT_NAME ~= SPortTable.SAMPLING_PORT_NAME)
-%    			
-%    			RETURN_CODE = RETURN_CODE_TYPE.INVALID_CONFIG;
-%    			return;
-%         end
+   		if(SAMPLING_PORT_NAME ~= SPortTable.SAMPLING_PORT_NAME)
+   			
+   			RETURN_CODE = RETURN_CODE_TYPE.INVALID_CONFIG;
+   			return;
+        end
         
-%  		if(Current_Partition_STATUE.OPERATING_MODE == NORMAL)
-%    		
-%    			RETURN_CODE = INVALID_MODE;
-%    			return;
-%         end
-
+ 		if(Current_Partition_STATUE.OPERATING_MODE ==  OPERATING_MODE_TYPE.NORMAL)
+   		
+   			RETURN_CODE = RETURN_CODE_TYPE.INVALID_MODE;
+   			return;
+        end
+      
  		global Sampling_Set;
-%         L=0;
-%         for i=1:255
-%             if ~isempty(Sampling_Set(i))
-%                 L = L+1;
-%             else
-%                 break;
-%             end
-%         end
-        
-        SPort = SAMPLING_PORT(SAMPLING_PORT_ATTRIBUTE.ID,SAMPLING_PORT_ATTRIBUTE.LAST_MSG_VALIDITY);
 
-        Sampling_Set(numel(Sampling_Set)+1) = SAMPLING_PORT_ATTRIBUTE.ID;
- 		SPort.NAME = SAMPLING_PORT_NAME;
- 		SPort.REFRESH_PERIOD = REFRESH_PERIOD;
- 		SPort.MAX_MESSAGE_SIZE = MAX_MESSAGE_SIZE;
- 		SPort.PORT_DIRECTION = PORT_DIRECTION;
+        SAMPLING_PORT_ATTRIBUTE.ID=round( 1+MAX_NUMBER_OF_PROCESS *rand(1,1) );
+        
+      
+        SPort = SAMPLING_PORT_CLASS(SAMPLING_PORT_ATTRIBUTE.ID,SAMPLING_PORT_NAME,REFRESH_PERIOD, MAX_MESSAGE_SIZE,PORT_DIRECTION,SAMPLING_PORT_ATTRIBUTE.LAST_MSG_VALIDITY);
+       
+        
+         for i = 1:MAX_NUMBER_OF_PROCESS 
+            if isempty( Sampling_Set{1,i} )
+                Sampling_Set{1,i} = SPort;
+                
+               break;
+            end
+        end
+%         Sampling_Set(numel(Sampling_Set)+1) =  round( 1+MAX_NUMBER_OF_PROCESS *rand(1,1) );
+%  		SPort.NAME = SAMPLING_PORT_NAME;
+%  		SPort.REFRESH_PERIOD = REFRESH_PERIOD;
+%  		SPort.MAX_MESSAGE_SIZE = MAX_MESSAGE_SIZE;
+%  		SPort.PORT_DIRECTION = PORT_DIRECTION;
         global Sampling_obj
         Sampling_obj{1,length(Sampling_obj)+1} = SPort;
         

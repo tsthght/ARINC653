@@ -3,22 +3,25 @@ function [ SAMPLING_PORT_ID,RETURN_CODE ] = GET_SAMPLING_PORT_ID( SAMPLING_PORT_
 %   此处显示详细说明
 		
 	    global RETURN_CODE_TYPE
-  		if(INVALID_NAME(SAMPLING_PORT_NAME))
+  		if(INVALID_NAME(SAMPLING_PORT_NAME)==0)
   		
 			RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
 			return;
         end
         
-  		global Sampling_obj
+  		global Sampling_Set
   		
-        for i =1:length(Sampling_obj)
-            if Sampling_obj{1,i}.NAME ==  SAMPLING_PORT_NAME
-                break
+        for i =1:length(Sampling_Set)
+            if isempty(Sampling_Set{1,i}) == 0
+                if Sampling_Set{1,i}.SAMPLING_PORT_NAME ==  SAMPLING_PORT_NAME
+                    ANS=i;
+                end
             end
+            
         end
         
   		
-  		SAMPLING_PORT_ID = Sampling_obj{1,i}.ID
+  		SAMPLING_PORT_ID = Sampling_Set{1,ANS}.ID
   		RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR
   		return;
 
