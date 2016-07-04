@@ -8,6 +8,7 @@ function [RETURN_CODE]= SET_PRIORITY(PROCESS_ID,PRIORITY)
              Process_Set{1,PROCESS_ID}.CURRENT_PRIORITY = PRIORITY;
              RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;	
          end
+end
 	 
 			
 		 	

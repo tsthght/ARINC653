@@ -28,31 +28,32 @@ end
 %在PCB中找到要挂起的进程
 for i = 1:MAX_NUMBER_OF_PROCESS
     if Process_Set{1,i}.ID==PROCESS_ID
+        index = i;
     break;    
     end
 end
 
 %如果进程是休眠装状态，模式错误
-if Process_Set{1,i}.PROCESS_STATE == PROCESS_STATE_TYPE.DORMANT
+if Process_Set{1,index}.PROCESS_STATE == PROCESS_STATE_TYPE.DORMANT
     RETURN_CODE = RETURN_CODE_TYPE.INVALID_MODE;
     return;
 end
 
 %如果进程是周期性的，模式错误
-if Process_Set{1,i}.PERIOD ~= INFINITE_TIME_VALUE
+if Process_Set{1,index}.PERIOD ~= 0
     RETURN_CODE = RETURN_CODE_TYPE.INVALID_MODE;
     return;
 end
 
 %如果进程是等待状态，不作任何操作
-if Process_Set{1,i}.PROCESS_STATE == PROCESS_STATE_TYPE.WAITING
+if Process_Set{1,index}.PROCESS_STATE == PROCESS_STATE_TYPE.WAITING
     RETURN_CODE = RETURN_CODE_TYPE.NO_ACTION;
     return;
     
 %将进程挂起
 else 
             DELETE_FROM_READY(PROCESS_ID);
-            Process_Set{1,i}.PROCESS_STATE = PROCESS_STATE_TYPE.WAITING;
+            Process_Set{1,index}.PROCESS_STATE = PROCESS_STATE_TYPE.WAITING;
             INSERT_INTO_WAITING(PROCESS_ID);
             RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
             return;
