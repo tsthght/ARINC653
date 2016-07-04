@@ -10,8 +10,6 @@ function [RETURN_CODE]=CREATE_PROCESS(ATTRIBUTES)
          global SYSTEM_TIME_TYPE;
          global Current_Partition_STATUS;
          global OPERATING_MODE_TYPE;
-         global PROCESS_NAME_SET;
-         global PROCESS_ID_SET;
 %          global OPERATING_MODE_TYPE;
 %          global CURRENT_PARTITION_STATUS;
 
@@ -103,19 +101,13 @@ function [RETURN_CODE]=CREATE_PROCESS(ATTRIBUTES)
 %        % fprintf('sdfsdf\n')
 %          Process_NAME_Set{1,id} = PROCESS_ATTRIBUTE_TYPE.NAME;
         
-        index = sum( cellfun('length',Process_Set) )+1;
-       
-                PROCESS_NAME_SET{1,index} = ATTRIBUTES.NAME;
-                PROCESS_ID_SET(index) = PRO.ID;
-                Process_Set{1,index} = PRO;
-                Dormant_Processes_set(index) = PRO.ID;
-%         for i = 1:MAX_NUMBER_OF_PROCESS 
-%             if isempty( Process_Set{1,i} )
-%                 Process_Set{1,i} = PRO;
-%                 Dormant_Processes_set{1,i} = PRO.ID;
-%                break;
-%             end
-%         end
+        for i = 1:MAX_NUMBER_OF_PROCESS 
+            if isempty( Process_Set{1,i} )
+                Process_Set{1,i} = PRO;
+                Dormant_Processes_set{1,i} = PRO.ID;
+               break;
+            end
+        end
         
         
         %Dormant_Processes_set=Dormant_Processes_set \-/ {Pro->ID};

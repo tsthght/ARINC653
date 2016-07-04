@@ -76,7 +76,7 @@ function [ SAMPLING_PORT_ID,RETURN_CODE ] = CREATE_SAMPLING_PORT(SAMPLING_PORT_N
          for i = 1:MAX_NUMBER_OF_PROCESS 
             if isempty( Sampling_Set{1,i} )
                 Sampling_Set{1,i} = SPort;
-                SYSTEM_NUMBER_OF_SAMPLING_PORTS = SYSTEM_NUMBER_OF_SAMPLING_PORTS+1;
+                
                break;
             end
         end
