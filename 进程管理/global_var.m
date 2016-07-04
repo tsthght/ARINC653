@@ -134,6 +134,7 @@ global SYSTEM_TIME_TYPE
 SYSTEM_TIME_TYPE = 2^64;
 global SYSTEM_MAX_TIMEOUT;
 SYSTEM_MAX_TIMEOUT = 32;
-global Time_Out_Signal
+
+global Time_Out_Signal;
 Time_Out_Signal.TRUE = 1;
 Time_Out_Signal.FALSE = 0;
