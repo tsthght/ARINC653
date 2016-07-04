@@ -1,4 +1,0 @@
-global SPortTable
-SPortTable.MAX_MESSAGE_SIZE=8;
-SPortTable.PORT_DIRECTION=12;
-SPortTable.SAMPLING_PORT_NAME='abc';

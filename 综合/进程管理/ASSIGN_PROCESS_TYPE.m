@@ -1,1 +1,0 @@
-PRO = PROCESS_TYPE()
