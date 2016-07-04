@@ -64,9 +64,9 @@ global Current_Partition_Timer;
 Current_Partition_Timer=cell(1,255);
 
 global ERROR_HANDLER_PROCESS_ID;
-ERROR_HANDLER_PROCESS_ID=0;
+ERROR_HANDLER_PROCESS_ID=nan;
 global INFINITE_TIME_VALUE;
-INFINITE_TIME_VALUE=0;
+INFINITE_TIME_VALUE=-1;
 
 global Current_Process
 Current_Process.ID=6;
@@ -132,3 +132,8 @@ global MAX_PRIORITY_VALUE
 MAX_PRIORITY_VALUE = 63;
 global SYSTEM_TIME_TYPE
 SYSTEM_TIME_TYPE = 2^64;
+global SYSTEM_MAX_TIMEOUT;
+SYSTEM_MAX_TIMEOUT = 32;
+global Time_Out_Signal
+Time_Out_Signal.TRUE = 1;
+Time_Out_Signal.FALSE = 0;
