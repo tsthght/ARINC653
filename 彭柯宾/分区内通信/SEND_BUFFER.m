@@ -12,7 +12,7 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
         global RETURN_CODE_TYPE
         global BUFFER_ATTRIBUTE
         global Process_Set
-        
+        global SYSTEM_LIMIT_NUMBER_OF_BUFFERS
   		if INVALID_ID(BUFFER_ID)==0 
           
 			RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
@@ -72,14 +72,14 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
 %                       _STOP_TIME_COUNTER(Timer); 
            
                
-                for j=1:255
-                    if ~isempty( Waiting_Buffer_Set{2,j} )
+                for j=1:SYSTEM_LIMIT_NUMBER_OF_BUFFERS 
+                    if ~isempty( Waiting_Buffer_Set{1,j} )
                         i = j;
                     end
                 end
             
-                id = Waiting_Buffer_Set{1,i};
-                for i= 1:255
+                id = Waiting_Buffer_Set{1,i}.ID;
+                for i= 1:SYSTEM_LIMIT_NUMBER_OF_BUFFERS 
                     if id == Process_Set{1,i}.ID
                         PRO = Process_Set{1,i};
                         break;

@@ -44,21 +44,20 @@ Current_Partition_STATUS.OPERATING_MODE=OPERATING_MODE_TYPE.COLD_START ;
 Current_Partition_STATUS.LOCK_LEVEL=0;
 
 global Process_Set
-Process_Set = cell(1,255);
+Process_Set = cell(0);
  
 global Process_Waiting_Resource_Set
-Process_Waiting_Resource_Set= cell(1,255);
+Process_Waiting_Resource_Set= [];
 global Ready_Processes_set
-Ready_Processes_set=cell(1,255);
+Ready_Processes_set=[];
 global Dormant_Processes_set
-Dormant_Processes_set=cell(1,255);
+Dormant_Processes_set=[];
 global Running_Processes_set;
-Running_Processes_set=cell(1,1);
+Running_Processes_set=[];
 global Waiting_Processes_set
-Waiting_Processes_set=cell(1,255);
+Waiting_Processes_set=[];
 
-global Buffer
-Buffer = cell(1,255);
+
 
 global Current_Partition_Timer;
 Current_Partition_Timer=cell(1,255);
@@ -138,3 +137,9 @@ SYSTEM_MAX_TIMEOUT = 32;
 global Time_Out_Signal;
 Time_Out_Signal.TRUE = 1;
 Time_Out_Signal.FALSE = 0;
+
+global PROCESS_NAME_SET
+ PROCESS_NAME_SET = cell(0);
+ global PROCESS_ID_SET
+ PROCESS_ID_SET = [];
+ 

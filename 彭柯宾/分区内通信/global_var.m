@@ -58,8 +58,18 @@ global Waiting_Processes_set
 Waiting_Processes_set=cell(1,255);
 
 %  global BUFFER_ATTRIBUTE;
-  global Waiting_Buffer_Set 
-  Waiting_Buffer_Set = cell(8,255);
+ global Buffer_set
+Buffer_set = cell(0);
+global Waiting_Buffer_Set
+Waiting_Buffer_Set = cell(0);
+global Buffer_name_set;
+Buffer_name_set = cell(0);
+global Buffer_id_set;
+Buffer_id_set = [];
+global SYSTEM_LIMIT_NUMBER_OF_BUFFERS
+SYSTEM_LIMIT_NUMBER_OF_BUFFERS = 255;
+global SYSTEM_NUMBER_OF_BUFFERS
+SYSTEM_NUMBER_OF_BUFFERS = 0;
 
 global Current_Partition_Timer;
 Current_Partition_Timer=cell(1,255);
@@ -95,6 +105,4 @@ Previous_Process.BASE_PRIORITY=0;
 Previous_Process.DEADLINE=30;
 Previous_Process.NAME=3;
 
-global SYSTEM_NUMBER_OF_BUFFERS
-SYSTEM_NUMBER_OF_BUFFERS = 0;
 
