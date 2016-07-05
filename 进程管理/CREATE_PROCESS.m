@@ -60,7 +60,7 @@ function [RETURN_CODE]=CREATE_PROCESS(ATTRIBUTES)
 %                 L = L+1;
 %             end
 %         end
-        id =  round( 1+MAX_NUMBER_OF_PROCESS *rand(1,1) );
+        id =  round( 1+(MAX_NUMBER_OF_PROCESS-1) *rand(1,1) );
        
         DORMANT = PROCESS_STATE_TYPE.DORMANT;
         
