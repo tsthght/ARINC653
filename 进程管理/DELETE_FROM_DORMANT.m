@@ -1,12 +1,12 @@
 function DELETE_FROM_DORMANT(PROCESS_ID)
 
     global Dormant_Processes_set;
-    for i=1:255
-            if Dormant_Processes_set{1,i}==PROCESS_ID
-                Dormant_Processes_set{1,i} = [];
+    global MAX_NUMBER_OF_PROCESS;
+    for i=1:MAX_NUMBER_OF_PROCESS
+            if Dormant_Processes_set(i)==PROCESS_ID
+                Dormant_Processes_set(i) = [];
                 break;
             end
     end 
-    %disp('PROCESS DELETE FROM DORMANT SUCCESS');
     
 end

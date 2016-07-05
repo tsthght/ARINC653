@@ -46,7 +46,7 @@ function RETURN_CODE = SUSPEND_SELF(TIME_OUT)
                     PRO = Process_Set{1,i};
                 end
                 if i == MAX_NUMBER_OF_PROCESS
-                    Running_Processes_set{1,1} = id;
+                    Running_Processes_set(1) = id;
                     Current_Process = PRO;
                 end
             end
