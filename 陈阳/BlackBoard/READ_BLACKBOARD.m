@@ -25,20 +25,14 @@ if INVALID_TIME_OUT(TIME_OUT)
  MESSAGE_ADDR=[];
 			return;
 end
- flag=0;
- s=0;
-            for i=1:255
-                if ~isempty(Blackboard_Set{1,i}) && Blackboard_Set{1,i}.ID == BLACKBOARD_ID 
-                    s =i;
-                    flag=1;
-                    break;
-                end
-            end
-    if flag==0
+ 
+    if FIND_BLACKBOARD_BYID( BLACKBOARD_ID )==0
          RETURN_CODE =  RETURN_CODE_TYPE.INVALID_PARAM;
          MESSAGE_ADDR=[];
 			return;
     end 
+    s=FIND_BLACKBOARD_BYID( BLACKBOARD_ID ); 
+    
 if Blackboard_Set{1,s}.EMPTY_INDICATOR == EMPTY_INDICATOR_TYPE.OCCUPIED
           MESSAGE_ADDR=cell(1,Blackboard_Set{1,s}.LENGTH);
     while TEMP_LENGTH< Blackboard_Set{1,s}.LENGTH
@@ -71,7 +65,7 @@ elseif TIME_OUT == INFINITE_TIME_VALUE
         end
     end
     INSERT_INTO_WAITING(Current_Process.ID);
-    disp('Ask_For_Process_Scheduling');
+    %disp('Ask_For_Process_Scheduling');
     
     MESSAGE_ADDR=cell(1,Blackboard_Set{1,s}.LENGTH);
    while TEMP_LENGTH< Blackboard_Set{1,s}.LENGTH

@@ -11,21 +11,13 @@ if INVALID_NAME(BLACKBOARD_NAME)
     return
 end
 
-flag=0;
-s=0;
-for i=1:256
-    if ~isempty(Blackboard_Set{1,i})&&strcmp(Blackboard_Set{1,i}.NAME,BLACKBOARD_NAME)
-        flag=1;
-        s=i;
-    end
-end
-if flag==0
+if FIND_BLACKBOARD_BYNAME( BLACKBOARD_NAME )==0
     RETURN_CODE = RETURN_CODE_TYPE. INVALID_CONFIG;
     BLACKBOARD_ID=0;
     return;
 
 end
-BLACKBOARD_ID = Blackboard_Set{1,s}.ID;
+BLACKBOARD_ID = Blackboard_Set{1,FIND_BLACKBOARD_BYNAME( BLACKBOARD_NAME )}.ID;
 RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
 
 

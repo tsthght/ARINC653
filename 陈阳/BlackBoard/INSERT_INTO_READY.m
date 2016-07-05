@@ -7,7 +7,7 @@ function INSERT_INTO_READY(PROCESS_ID)
                 break;
             end
     end 
-    disp('PROCESS INSERT INTO READY SUCCESS');
+    %disp('PROCESS INSERT INTO READY SUCCESS');
     
 end
 

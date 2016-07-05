@@ -15,16 +15,8 @@ if INVALID_ID(BLACKBOARD_ID)
 			return;
 
 end
- flag=0;
- s=0;
-            for i=1:255
-                if ~isempty(Blackboard_Set{1,i}) && Blackboard_Set{1,i}.ID== BLACKBOARD_ID 
-                    s =i;
-                    flag=1;
-                    break;
-                end
-            end
-    if flag==0
+
+    if FIND_BLACKBOARD_BYID( BLACKBOARD_ID )==0
          RETURN_CODE =  RETURN_CODE_TYPE.INVALID_PARAM;
 			return;
     end 

@@ -10,24 +10,15 @@ if INVALID_ID(BLACKBOARD_ID)
 			return;
 end
 
-flag=0;
- s=0;
-            for i=1:256
-                if ~isempty(Blackboard_Set{1,i}) && Blackboard_Set{1,i}.ID == BLACKBOARD_ID 
-                    s =i;
-                    flag=1;
-                    break;
-                end
-            end
-    if flag==0
+    if FIND_BLACKBOARD_BYID( BLACKBOARD_ID )==0
          RETURN_CODE =  RETURN_CODE_TYPE.INVALID_PARAM;
          BLACKBOARD_STATUS=[];
 			return;
     end 
     
-BLACKBOARD_STATUS.EMPTY_INDICATOR=Blackboard_Set{1,s}.EMPTY_INDICATOR;
-BLACKBOARD_STATUS.MAX_MESSAGE_SIZE = Blackboard_Set{1,s}.MAX_MESSAGE_SIZE;
-BLACKBOARD_STATUS.WAITING_PROCESSES =  Blackboard_Set{1,s}.WAITING_PROCESSES;
+BLACKBOARD_STATUS.EMPTY_INDICATOR=Blackboard_Set{1,FIND_BLACKBOARD_BYID( BLACKBOARD_ID )}.EMPTY_INDICATOR;
+BLACKBOARD_STATUS.MAX_MESSAGE_SIZE = Blackboard_Set{1,FIND_BLACKBOARD_BYID( BLACKBOARD_ID )}.MAX_MESSAGE_SIZE;
+BLACKBOARD_STATUS.WAITING_PROCESSES =  Blackboard_Set{1,FIND_BLACKBOARD_BYID( BLACKBOARD_ID )}.WAITING_PROCESSES;
 RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
 
 

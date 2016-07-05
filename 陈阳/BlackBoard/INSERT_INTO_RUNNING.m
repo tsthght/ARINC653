@@ -7,7 +7,7 @@ function INSERT_INTO_RUNNING(PROCESS_ID)
                 break;
             end
     end 
-    disp('PROCESS INSERT INTO Running SUCCESS');
+    %disp('PROCESS INSERT INTO Running SUCCESS');
     
 end
 

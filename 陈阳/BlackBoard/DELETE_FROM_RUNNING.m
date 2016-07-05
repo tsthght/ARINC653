@@ -7,6 +7,6 @@ function DELETE_FROM_RUNNING(PROCESS_ID)
                 break;
             end
     end 
-    disp('PROCESS DELETE FROM RUNNING SUCCESS');
+   % disp('PROCESS DELETE FROM RUNNING SUCCESS');
     
 end

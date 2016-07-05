@@ -7,7 +7,7 @@ function DELETE_FROM_WAITING(PROCESS_ID)
                 break;
             end
     end 
-    disp('PROCESS DELETE FROM READY SUCCESS');
+    %disp('PROCESS DELETE FROM READY SUCCESS');
     
 end
 

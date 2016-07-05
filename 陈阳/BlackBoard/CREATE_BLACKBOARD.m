@@ -28,14 +28,9 @@ if SYSTEM_NUMBER_OF_BLACKBOARDS == SYSTEM_LIMIT_NUMBER_OF_BLACKBOARDS
     return;
 end
 
-flag=0;
-for i=1:256
-    if ~isempty(Blackboard_Set{1,i})&&strcmp(Blackboard_Set{1,i}.NAME,BLACKBOARD_NAME)
-        flag=1;
-    end
-end
 
-if flag==1
+
+if FIND_BLACKBOARD( BLACKBOARD_NAME )~=0
     RETURN_CODE = RETURN_CODE_TYPE.NO_ACTION;
     BLACKBOARD_ID=0;
     return;
@@ -56,23 +51,15 @@ end
         BBoard.MESSAGE_ADDR=cell(1,MAX_MESSAGE_SIZE);
         
         BBoard.NAME = BLACKBOARD_NAME;
-        
-        for ID=1:255
-            flag=0;
-            for i=1:255
-                if ~isempty(Blackboard_Set{1,i}) && Blackboard_Set{1,i}.ID==ID 
-                    flag=1;
-                    break;
-                end
-            end
-            if flag ==0
-                BBoard.ID=ID;
-                 break;
-            end
-           
-            
+        for i=1:SYSTEM_LIMIT_NUMBER_OF_BLACKBOARDS
+        id =  round( 1+(SYSTEM_LIMIT_NUMBER_OF_BLACKBOARDS-1) *rand(1,1) );
+           if  FIND_BLACKBOARD_BYID(id)==0
+               BBoard.ID=id;
+               break
+           end
         end
-       for i=1:255
+       
+       for i=1:SYSTEM_LIMIT_NUMBER_OF_BLACKBOARDS
          if isempty(Blackboard_Set{1,i})
              Blackboard_Set{1,i}=BBoard;
               break;

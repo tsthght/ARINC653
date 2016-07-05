@@ -7,6 +7,6 @@ function DELETE_FROM_DORMANT(PROCESS_ID)
                 break;
             end
     end 
-    disp('PROCESS DELETE FROM DORMANT SUCCESS');
+    %disp('PROCESS DELETE FROM DORMANT SUCCESS');
     
 end

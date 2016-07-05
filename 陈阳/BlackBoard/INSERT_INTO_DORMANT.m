@@ -7,7 +7,7 @@ function INSERT_INTO_DORMANT(PROCESS_ID)
                 break;
             end
     end 
-    disp('PROCESS INSERT INTO DORMANT SUCCESS');
+   % disp('PROCESS INSERT INTO DORMANT SUCCESS');
     
 end
 
