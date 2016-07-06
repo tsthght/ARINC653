@@ -62,7 +62,7 @@ global Current_Partition_Timer;
 Current_Partition_Timer=cell(1,255);
 
 global ERROR_HANDLER_PROCESS_ID;
-ERROR_HANDLER_PROCESS_ID=nan;
+ERROR_HANDLER_PROCESS_ID = 0;
 global INFINITE_TIME_VALUE;
 INFINITE_TIME_VALUE=-1;
 
@@ -108,7 +108,7 @@ Idel_Process.OPERATING_MODE = 0;
 global LOCK_LEVEL
 LOCK_LEVEL = 0;
 global MAX_LOCK_LEVEL
-MAX_LOCK_LEVEL = 0;
+MAX_LOCK_LEVEL = 16;
 
 global PROCESS_STATUS
  PROCESS_STATUS.DEADLINE_TIME=0;
@@ -156,4 +156,6 @@ MAX_NUMBER_OF_EVENTS = 256;
 
 global SYSTEM_NUMBER_OF_EVENTS;
 SYSTEM_NUMBER_OF_EVENTS = numel(Event_Set);
- 
+
+global Waiting_Event_Set;
+Waiting_Event_Set = cell(SYSTEM_NUMBER_OF_EVENTS,0);

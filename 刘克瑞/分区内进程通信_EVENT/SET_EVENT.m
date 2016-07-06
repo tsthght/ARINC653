@@ -7,7 +7,6 @@ global Waiting_Timer_Set;
 global Waiting_Event_Set;
 global Process_Set;
 global PROCESS_STATE_TYPE;
-global Ready_Processes_set;
 global Waiting_Processes_set;
 global EVENT_STATE_TYPE;
 global SYSTEM_NUMBER_OF_EVENTS;
@@ -34,8 +33,7 @@ end
 
 if numel(Event_Set{1,index}.WAITING_PROCESSES) > 0
     count = numel(Event_Set{1,index}.WAITING_PROCESSES);
-        for i = 1:255
-           if isempty(Waiting_Event_Set{Event_Set{1,index}.ID,i}) == 0;
+        for i = 1:count
                 for j = i:255
                     if Waiting_Event_Set{Event_Set{1,index}.ID,i} == Waiting_Timer_Set{1,j}
                        Waiting_Timer_Set{1,j}=[];
