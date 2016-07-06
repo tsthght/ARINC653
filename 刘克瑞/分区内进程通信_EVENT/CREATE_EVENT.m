@@ -28,7 +28,7 @@ end
 
 EVENT_ID = CREATE_EVENT_ID();
 
-EVENT_ID = round( 1+MAX_NUMBER_OF_EVENTS *rand(1,1) );
+
 
 
 
