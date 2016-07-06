@@ -10,24 +10,25 @@ global PROCESS_STATE_TYPE;
 global Ready_Processes_set;
 global Waiting_Processes_set;
 global EVENT_STATE_TYPE;
+global SYSTEM_NUMBER_OF_EVENTS;
 
 
-flag = EVENT_ID_EXIST(EVENT_ID);
-if flag == 0
-    RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM
+if EVENT_ID_EXIST(EVENT_ID) == 0
+    RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
     return;
 end
 
-for i = 1:256
+for i = 1:SYSTEM_NUMBER_OF_EVENTS
     if  Event_Set{1,i}.ID == EVENT_ID
         if Event_Set{1,i}.STATE == EVENT_STATE_TYPE.UP
-            disp('THIS EVENT HAS ALREADY BEEN SET!!');
-            return;
+            break;
         else 
-            Event_Set{1,i}.STATE=EVENT_STATE_TYPE.UP;
+            Event_Set{1,i}.STATE = EVENT_STATE_TYPE.UP;
             index = i;
             break;
         end
+    else
+        continue;
     end
 end
 
@@ -60,11 +61,11 @@ if numel(Event_Set{1,index}.WAITING_PROCESSES) > 0
         end
 end       
         if Current_Partition_STATUS.LOCK_LEVEL == 0
-            disp('Ask_For_Process_Scheduling()');
+           
         end    
 
 
- RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR
+ RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
  return;
 end
 

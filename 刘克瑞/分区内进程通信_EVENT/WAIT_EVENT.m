@@ -8,19 +8,20 @@ global Running_Process;
 global PROCESS_STATE_TYPE;
 global Time_Out_Signal;
 global Current_Process;
+global SYSTEM_MAX_TIMEOUT;
+global SYSTEM_NUMBER_OF_EVENTS;
 
-flag = EVENT_ID_EXIST(EVENT_ID);
-if flag == 0
-    RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM
+if  EVENT_ID_EXIST(EVENT_ID) == 0
+    RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
     return;
 end
 
-if TIME_OUT > 200
-    RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM
+if TIME_OUT > SYSTEM_MAX_TIMEOUT
+    RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
     return;
 end
 
-for i = 1:256
+for i = 1:SYSTEM_NUMBER_OF_EVENTS
     if  Event_Set{1,i}.ID == EVENT_ID
         index = i;
         break;

@@ -8,21 +8,24 @@ global OPERATING_MODE_TYPE;
 global Current_Partition_STATUS;
 
 if EVENT_NAME_EXIST(EVENT_NAME)==1
+    EVENT_ID = -1;
     RETURN_CODE = RETURN_CODE_TYPE.NO_ACTION;
     return;
 end
 
 if SYSTEM_NUMBER_OF_EVENTS == MAX_NUMBER_OF_EVENTS
+    EVENT_ID = -1;
     RETURN_CODE = RETURN_CODE_TYPE.INVALID_CONFIG;
     return;
 end
 
 if Current_Partition_STATUS.OPERATING_MODE == OPERATING_MODE_TYPE.NORMAL
+    EVENT_ID = -1;
     RETURN_CODE = RETURN_CODE_TYPE.INVALID_MODE;
     return;
 end
 
-EVENT_ID = round( 1+(MAX_NUMBER_OF_EVENTS-1) *rand(1,1) );
+EVENT_ID = CREATE_EVENT_ID();
 
 
 Event_Set{1,numel(Event_Set)+1}= Event_TYPE(EVENT_ID,EVENT_NAME,0,[]);

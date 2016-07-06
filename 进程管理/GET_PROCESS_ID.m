@@ -3,7 +3,7 @@ function [RETURN_CODE,PROCESS_ID]=GET_PROCESS_ID (PROCESS_NAME)
         
         global RETURN_CODE_TYPE;
         global Process_Set;
-        global MAX_NUMBER_OF_PROCESS;
+        global SYSTEM_NUMBER_OF_PROCESS;
 
 
         if INVALIDE_NAME(PROCESS_NAME) == 0
@@ -20,7 +20,7 @@ function [RETURN_CODE,PROCESS_ID]=GET_PROCESS_ID (PROCESS_NAME)
 %         end
 		
 
- 		for i = 1:MAX_NUMBER_OF_PROCESS 
+ 		for i = 1:SYSTEM_NUMBER_OF_PROCESS 
             if  isempty( Process_Set{1,i} ) == 0
                 if strcmp( Process_Set{1,i}.NAME,PROCESS_NAME ) == 1
                      ID = Process_Set{1,i}.ID;
