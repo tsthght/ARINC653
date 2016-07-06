@@ -13,39 +13,24 @@ function RETURN_CODE = RESUME (  PROCESS_ID )
        
         
          
-         if INVALID_ID(PROCESS_ID)==0
-             RETURN_CODE =  RETURN_CODE_TYPE.INVALID_PARAM;
-			return;
-         end
+        if INVALID_ID(PROCESS_ID) == 0 || Current_Process.ID == PROCESS_ID
+	        RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
+             return;
+        end
          
-         num=0;
-         flag=0;
-         for i=1:255
-             if ~isempty(Process_Set{1,i})&&Process_Set{1,i}.ID==PROCESS_ID
-                 num=i;
-                 flag=1;
-                 break
-                 
-             end
-         end
+        PRO = Process_Set{1,FIND_PROCESS_INDEX( PROCESS_ID )};
          
-         
-         if flag==0|| PROCESS_ID == Current_Process.ID
-             RETURN_CODE =  RETURN_CODE_TYPE.INVALID_PARAM;
-    		return;
-         end  
-         
-         if Process_Set{1,num}.PROCESS_STATE == PROCESS_STATE_TYPE.DORMANT
+         if  PRO.PROCESS_STATE == PROCESS_STATE_TYPE.DORMANT
              RETURN_CODE =  RETURN_CODE_TYPE.INVALID_MODE;
     		return;
          end
          
-         if Process_Set{1,num}.PERIOD ~= INFINITE_TIME_VALUE
+         if PRO.PERIOD ~= INFINITE_TIME_VALUE
              RETURN_CODE =  RETURN_CODE_TYPE.INVALID_MODE;
     		return;
          end
          
-         if Process_Set{1,num}.PROCESS_STATE ~= PROCESS_STATE_TYPE.WAITING
+         if  PRO.PROCESS_STATE ~= PROCESS_STATE_TYPE.WAITING
              RETURN_CODE =  RETURN_CODE_TYPE.NO_ACTION;
     		return;
          end
@@ -62,18 +47,19 @@ function RETURN_CODE = RESUME (  PROCESS_ID )
          
          if flag==0
              
-              Process_Set{1,num}.PROCESS_STATE = PROCESS_STATE_TYPE.READY;
+               PRO.PROCESS_STATE = PROCESS_STATE_TYPE.READY;
+               Process_Set{1,FIND_PROCESS_INDEX( PROCESS_ID )} = PRO;
              
             
-                    DELETE_FROM_WAITING(PROCESS_ID);
+               DELETE_FROM_WAITING(PROCESS_ID);
                  
-                     INSERT_INTO_READY(PROCESS_ID);
+               INSERT_INTO_READY(PROCESS_ID);
                  
          
              
             
              if Current_Partition_STATUS.LOCK_LEVEL == 0
-                 disp( 'Ask_For_Process_Scheduling');
+                 % 'Ask_For_Process_Scheduling';
              end
          end
              

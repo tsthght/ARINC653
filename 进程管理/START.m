@@ -4,21 +4,11 @@ function [RETURN_CODE] = START(PROCESS_ID)
         global RETURN_CODE_TYPE;
         global OPERATING_MODE_TYPE;
         global Process_Set;
-        global  Current_Partition_STATUS;
-        
+        global Current_Partition_STATUS;
+        global PROCESS_SCHEDULING_FLAG;
         %
-        location=0;
-        flag=0;
-        for i=1:255
-            if ~isempty(Process_Set{1,i})
-                if Process_Set{1,i}.ID == PROCESS_ID;
-                    flag = 1;
-                    location=i;
-                    break;
-                end
-            end
-        end
-        if flag == 0
+        location = FIND_PROCESS_INDEX( PROCESS_ID ); 
+        if location == -1
 			RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
 			return
         end
@@ -45,7 +35,7 @@ function [RETURN_CODE] = START(PROCESS_ID)
                 INSERT_INTO_READY(PROCESS_ID);
 				Process_Set{1,location}.DEADLINE_TIME = 10 + Process_Set{1,location}.TIME_CAPACITY;% CURRENT_SYSTEM_CLOCK()				                
                 if  Current_Partition_STATUS.LOCK_LEVEL == 0
-    				%PROCESS_SCHEDULING(PROCESS_ID,location);
+    				PROCESS_SCHEDULING_FLAG{1,1}=1;
                 end                
             else
 				Process_Set{1,location}.PROCESS_STATE = PROCESS_STATE_TYPE.WAITING;

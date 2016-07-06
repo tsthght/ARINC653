@@ -13,38 +13,25 @@ function [ RETURN_CODE ] = STOP( PROCESS_ID )
          global Previous_Process;
          global ERROR_HANDLER_PROCESS_ID;
          
-         if INVALID_ID(PROCESS_ID)==0
-            RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
-			return;
-         end
+        if INVALID_ID(PROCESS_ID) == 0 || Current_Process.ID == PROCESS_ID
+	        RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
+             return;
+        end
          
-         num=0;
-         flag=0;
-         for i=1:255
-             if ~isempty(Process_Set{1,i})&&Process_Set{1,i}.ID==PROCESS_ID
-                 num=i;
-                 flag=1;
-                 break
-                 
-             end
-         end
-          
-         if flag==0|| PROCESS_ID == Current_Process.ID
-            RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
-			return;
-         end 
+        PRO = Process_Set{1,FIND_PROCESS_INDEX( PROCESS_ID )};
          
-         if Process_Set{1,num}.PROCESS_STATE == PROCESS_STATE_TYPE.DORMANT
+         if  PRO.PROCESS_STATE == PROCESS_STATE_TYPE.DORMANT
              RETURN_CODE = RETURN_CODE_TYPE.NO_ACTION;
     		return;
          end
-         if Process_Set{1,num}.PROCESS_STATE == PROCESS_STATE_TYPE.READY
+         if  PRO.PROCESS_STATE == PROCESS_STATE_TYPE.READY
              DELETE_FROM_READY(PROCESS_ID);
-         elseif Process_Set{1,num}.PROCESS_STATE == PROCESS_STATE_TYPE.WAITING
+         elseif  PRO.PROCESS_STATE == PROCESS_STATE_TYPE.WAITING
              DELETE_FROM_WAITING(PROCESS_ID);
          end
          
-         Process_Set{1,num}.PROCESS_STATE = PROCESS_STATE_TYPE.DORMANT;
+          PRO.PROCESS_STATE = PROCESS_STATE_TYPE.DORMANT;
+           Process_Set{1,FIND_PROCESS_INDEX( PROCESS_ID )} = PRO;
         INSERT_INTO_DORMANT(PROCESS_ID);
          if Current_Process.ID == ERROR_HANDLER_PROCESS_ID && PROCESS_ID == Previous_Process.ID
              Current_Partition_STATUS.LOCK_LEVEL = 0;
