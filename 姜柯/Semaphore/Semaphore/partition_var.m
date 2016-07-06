@@ -1,0 +1,7 @@
+global Current_Partition_STATUS
+Current_Partition_STATUS.PERIOD=0;
+Current_Partition_STATUS.DURATION=0;
+Current_Partition_STATUS.IDENTIFIER=1;
+Current_Partition_STATUS.LOCK_LEVEL=0;
+Current_Partition_STATUS.OPERATING_MODE=0;
+Current_Partition_STATUS.START_CONDITION=3;

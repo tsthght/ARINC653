@@ -3,41 +3,28 @@ function [ RETURN_CODE ] = WAIT_SEMAPHORE( SEMAPHORE_ID,TIME_OUT )
 global RETURN_CODE_TYPE;
 global PROCESS_STATE_TYPE;
 global Semaphore_Set;
-global PAR;
-global PRO;
+global Current_Partition_STATUS;
+global INFINITE_TIME_VALUE;
 
-INFINITE_TIME_VALUE = -1;
-
-flag=INVALID_ID(SEMAPHORE_ID);
-if flag == 0
+if SEMAPHORE_INVALID_ID(SEMAPHORE_ID) == 0
     RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
-    disp(RETURN_CODE);
-    disp('a');
     return;
 end
 
 if TIME_OUT<-9223372036854775809 || TIME_OUT>9223372036854775808
     RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
-    disp(RETURN_CODE);
-    disp('b');
     return;
 end
 
 if Semaphore_Set{1,SEMAPHORE_ID}.CURRENT_VALUE>0
     Semaphore_Set{1,SEMAPHORE_ID}.CURRENT_VALUE=Semaphore_Set{1,SEMAPHORE_ID}.CURRENT_VALUE-1;
     RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
-    disp(RETURN_CODE);
-    disp('c');
     return;
 elseif TIME_OUT == 0
     RETURN_CODE = RETURN_CODE_TYPE.NOT_AVAILABLE;
-    disp(RETURN_CODE);
-    disp('d');
 	return;
-elseif PAR.LOCK_LEVEL > 0 % || ERROR_HANDLER_PROCESS
+elseif Current_Partition_STATUS.LOCK_LEVEL > 0 % || ERROR_HANDLER_PROCESS
     RETURN_CODE = RETURN_CODE_TYPE.INVALID_MODE;
-    disp(RETURN_CODE);
-    disp('e');
 	return;
 elseif TIME_OUT == INFINITE_TIME_VALUE
     PRO.PROCESS_STATE = PROCESS_STATE_TYPE.WAITING;
@@ -45,8 +32,6 @@ elseif TIME_OUT == INFINITE_TIME_VALUE
     INSERT_INTO_SEMAPHORE_QUEUE(SEMAPHORE_ID,PRO.ID);
     PROCESS_SCHEDULING();
     RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
-    disp(RETURN_CODE);
-    disp('f');
 	return;
 else
     PRO.PROCESS_STATE = PROCESS_STATE_TYPE.WAITING;
@@ -57,13 +42,9 @@ else
     signal=TIME_OUT_SIGNAL(PRO.ID);
     if  signal== true
         RETURN_CODE = RETURN_CODE_TYPE.TIMED_OUT;
-        disp(RETURN_CODE);
-        disp('g');
 	return;
     else
         RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
-        disp(RETURN_CODE);
-        disp('h');
 	return;
     end
 end

@@ -19,21 +19,14 @@ OPERATING_MODE_TYPE.COLD_START = 1;
 OPERATING_MODE_TYPE.WARM_START = 2;
 OPERATING_MODE_TYPE.NORMAL = 3;
 
-global Process_Set
-Process_Set = cell(1,255);
-global Process_ID_Set
-Process_ID_Set=cell(1,255);
-global Process_NAME_Set
-Process_NAME_Set=cell(1,255);
-
-global Ready_Processes_set
-Ready_Processes_set=cell(1,255);
-global Dormant_Processes_set
-Dormant_Processes_set=cell(1,255);
-global Running_Processes_set;
-Running_Processes_set=cell(1,255);
-global Waiting_Processes_set
-Waiting_Processes_set=cell(1,255);
-
-
+global System_Limit_Number_Of_Semaphores
+System_Limit_Number_Of_Semaphores = 512;
+global MAX_SEMAPHORE_VALUE
+MAX_SEMAPHORE_VALUE = 32767;
+global FIFO
+FIFO = 1;
+global PRIORITY_ORDER
+PRIORITY_ORDER = 0;
+global INFINITE_TIME_VALUE
+INFINITE_TIME_VALUE = -1;
 
