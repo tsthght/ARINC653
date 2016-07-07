@@ -6,7 +6,6 @@ global Waiting_Timer_Set;
 global Process_Set;
 global PROCESS_STATE_TYPE;
 global Waiting_Blackboard_Set;
-global PROCESS_SCHEDULING_FLAG
 
 
 TEMP_LENGTH = 0;
@@ -54,8 +53,7 @@ TEMP_LENGTH = 0;
          Waiting_Blackboard_Set{1,j}=[];
          DELETE_FROM_WAITING(y);
          if Current_Partition_STATUS.LOCK_LEVEL == 0
-             PROCESS_SCHEDULING_FLAG = 1;
-
+             disp('Ask_For_Process_Scheduling');
          end
               
           j=j+1;

@@ -10,6 +10,8 @@ function RETURN_CODE = RESUME (  PROCESS_ID )
          global Current_Partition_STATUS;
          global Current_Process;
          global INFINITE_TIME_VALUE;
+         global PROCESS_SCHEDULING_FLAG
+
        
         
          
@@ -59,7 +61,7 @@ function RETURN_CODE = RESUME (  PROCESS_ID )
              
             
              if Current_Partition_STATUS.LOCK_LEVEL == 0
-                 % 'Ask_For_Process_Scheduling';
+                 PROCESS_SCHEDULING_FLAG = 1;% 'Ask_For_Process_Scheduling';
              end
          end
              

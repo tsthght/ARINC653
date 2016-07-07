@@ -12,6 +12,8 @@ function [ RETURN_CODE ] = STOP( PROCESS_ID )
          global Dormant_Processes_set;
          global Previous_Process;
          global ERROR_HANDLER_PROCESS_ID;
+        
+
          
         if INVALID_ID(PROCESS_ID) == 0 || Current_Process.ID == PROCESS_ID
 	        RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
