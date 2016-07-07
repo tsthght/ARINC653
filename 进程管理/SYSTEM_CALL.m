@@ -1,61 +1,50 @@
-function [RETURN_CODE] = SYSTEM_CALL(systemcall_id)
+function SYSTEM_CALL(systemcall_id)
 
-global SYS_GET_PROCESS_ID;
-global SYS_GET_PROCESS_STATUS;
-global SYS_CREATE_PROCESS;
-global SYS_SET_PRIORITY;
-global SYS_SUSPEND_SELF;
-global SYS_SUSPEND;
-global SYS_RESUME;
-global SYS_STOP_SELF;
-global SYS_STOP;
-global SYS_START;
-global SYS_DELAYED_START;
-global SYS_LOCK_PREEMPTION;
-global SYS_UNLOCK_PREEMPTION;
-global SYS_GET_MY_ID;
+global System_Call_Table;
+global PARA_REG1;
+global PARA_REG2;
 
 switch(systemcall_id)
-    case SYS_GET_PROCESS_ID
-        RETURN_CODE = GET_PROCESS_ID(PROCESS_NAME);
+    case System_Call_Table{1,1}.ID
+        [RETURN_CODE,PROCESS_ID] = GET_PROCESS_ID(PARA_REG2{1,1})
         return;
-    case SYS_GET_PROCESS_STATUS
-        RETURN_CODE = GET_PROCESS_STATUS(PROCESS_ID);
+    case System_Call_Table{1,2}.ID
+        [RETURN_CODE,PROCESS_STATUS] = GET_PROCESS_STATUS(PARA_REG1{1,1})
         return;
-    case SYS_CREATE_PROCESS
-        RETURN_CODE = CREATE_PROCESS(ATTRIBUTES);
+    case System_Call_Table{1,3}.ID
+        RETURN_CODE = CREATE_PROCESS(PARA_REG2{1,1})
         return;
-    case SYS_SET_PRIORITY
-        RETURN_CODE = SET_PRIORITY(PROCESS_ID,PRIORITY);
+    case System_Call_Table{1,4}.ID
+        RETURN_CODE = SET_PRIORITY(PARA_REG1{1,1},PARA_REG1{1,2})
         return;
-    case SYS_SUSPEND_SELF
-        RETURN_CODE = SUSPEND_SELF(TIME_OUT);
+    case System_Call_Table{1,5}.ID
+        RETURN_CODE = SUSPEND_SELF(PARA_REG1{1,1})
         return;
-    case SYS_SUSPEND
-        RETURN_CODE = SUSPEND(PROCESS_ID);
+    case System_Call_Table{1,6}.ID
+        RETURN_CODE = SUSPEND(PARA_REG1{1,1})
         return;
-    case SYS_RESUME
-        RETURN_CODE = RESUME(PROCESS_ID);
+    case System_Call_Table{1,7}.ID
+        RETURN_CODE = RESUME(PARA_REG1{1,1})
         return;
-    case SYS_STOP_SELF
-        RETURN_CODE = STOP_SELF();
+    case System_Call_Table{1,8}.ID
+        RETURN_CODE = STOP_SELF()
         return;
-    case SYS_STOP
-        RETURN_CODE = STOP(PROCESS_ID);
+    case System_Call_Table{1,9}.ID
+        RETURN_CODE = STOP(PARA_REG1{1,1})
         return;
-    case SYS_START
-        RETURN_CODE = START(PROCESS_ID);
+    case System_Call_Table{1,10}.ID
+        RETURN_CODE = START(PARA_REG1{1,1})
         return;
-    case SYS_DELAYED_START
-        RETURN_CODE = DELAYED_START(PROCESS_ID,DELAY_TIME);
+    case System_Call_Table{1,11}.ID
+        RETURN_CODE = DELAYED_START(PARA_REG1{1,1},PARA_REG1{1,2})
         return;
-    case SYS_LOCK_PREEMPTION
-        RETURN_CODE = LOCK_PREEMPTION();
+    case System_Call_Table{1,12}.ID
+       [LOCK_LEVEL,RETURN_CODE] = LOCK_PREEMPTION()
         return;
-    case SYS_UNLOCK_PREEMPTION
-        RETURN_CODE = UNLOCK_PREEMPTION();
+    case System_Call_Table{1,13}.ID
+       [LOCK_LEVEL,RETURN_CODE] = UNLOCK_PREEMPTION()
         return;
-    case SYS_GET_MY_ID
-        RETURN_CODE = GET_MY_ID();
+    case System_Call_Table{1,14}.ID
+       [PROCESS_ID,RETURN_CODE] = GET_MY_ID()
         return;
 end
