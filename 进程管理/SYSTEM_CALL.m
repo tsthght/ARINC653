@@ -4,6 +4,7 @@ global System_Call_Table;
 global PARA_REG1;
 global PARA_REG2;
 
+
 switch(systemcall_id)
     case System_Call_Table{1,1}.ID
         [RETURN_CODE,PROCESS_ID] = GET_PROCESS_ID(PARA_REG2{1,1})
