@@ -2,13 +2,7 @@ function CREATE_TIME_OUT_COUNTER(PRO_ID,TIME_OUT)
 
 global Time_Out_Set;
 
-num=0;
-for i=1:255
-    if isempty(Time_Out_Set{1,i});
-         num=i;
-         break;
-    end
-end 
+num=numel(Time_Out_Set)+1;
 
 if num==1
     TIME = TIME_OUT_ATTRIBUTE_TYPE(0,0,0);

@@ -9,9 +9,6 @@ flag=INVALID_NAME(SEMAPHORE_NAME);
 if flag == 0
     RETURN_CODE = RETURN_CODE_TYPE.INVALID_CONFIG;
     SEMAPHORE_ID=0;
-    disp(RETURN_CODE);
-    disp(SEMAPHORE_ID);
-    disp('a');
     return;
 end
 
@@ -25,9 +22,6 @@ end
 
 SEMAPHORE_ID=Semaphore_Set{1,ID}.ID;
 RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
-disp(RETURN_CODE);
-disp(SEMAPHORE_ID);
-disp('b');
 
 end
 
