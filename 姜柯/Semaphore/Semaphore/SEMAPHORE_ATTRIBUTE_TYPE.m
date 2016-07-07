@@ -7,7 +7,6 @@ classdef SEMAPHORE_ATTRIBUTE_TYPE
         MAXIMUM_VALUE;
         WAITING_PROCESSES;
         SEMAPHORE_QUEUE;
-        P;
     end
     
     methods
