@@ -7,10 +7,8 @@ function RETURN_CODE = SUSPEND_SELF(TIME_OUT)
     global Current_Partition_STATUS;
     global SYSTEM_MAX_TIMEOUT;
     global Time_Out_Signal;
-    global Running_Processes_set;
-    global Process_Set;
     global PROCESS_STATE_TYPE;
-    global MAX_NUMBER_OF_PROCESS;
+    global PROCESS_SCHEDULING_FLAG;
 
    
         if Current_Partition_STATUS.LOCK_LEVEL ~= 0 || Current_Process.ID == ERROR_HANDLER_PROCESS_ID; 
@@ -37,19 +35,8 @@ function RETURN_CODE = SUSPEND_SELF(TIME_OUT)
             if TIME_OUT ~= INFINITE_TIME_VALUE
                 TIME_COUNTER = struct('PROCESS_ID',Current_Process.ID,'DURATION',TIME_OUT,'TOS',0);
             end
-            max = 0;
-            id = 0;
-            for i =1:MAX_NUMBER_OF_PROCESS
-                if Process_Set{1,i}.CURRENT_PRIORITY > max
-                    max = Process_Set{1,i}.CURRENT_PRIORITY;
-                    id = Process_Set{1,i}.ID;
-                    PRO = Process_Set{1,i};
-                end
-                if i == MAX_NUMBER_OF_PROCESS
-                    Running_Processes_set(1) = id;
-                    Current_Process = PRO;
-                end
-            end
+            
+            PROCESS_SCHEDULING_FLAG = 1;
                 
   			if TIME_COUNTER.TOS == Time_Out_Signal.TRUE
     			RETURN_CODE = RETURN_CODE_TYPE.TIME_OUT;
@@ -58,6 +45,6 @@ function RETURN_CODE = SUSPEND_SELF(TIME_OUT)
     			RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
     			return;
             end
-        end
+       end
 
 

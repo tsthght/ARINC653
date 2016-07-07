@@ -3,20 +3,25 @@ function PROCESS_SCHEDULING()
     global Running_Processes_set;
     global Ready_Processes_set;
     global Process_Set;
-    global MAX_NUMBER_OF_PROCESS;
+    global SYSTEM_NUMBER_OF_PROCESS;
+    global Current_Process;
     
-    running_process=0;
-    current_priority=0;
-    location=0;
     
-    for i=1:MAX_NUMBER_OF_PROCESS
-        location=FIND_PROCESS_INDEX(Ready_Processes_set{1,i});
-        if location ~= -1
-            if Process_Set{1,location}.CURRENT_PRIORITY>current_priority
-                running_process=Ready_Processes_set{1,i};
-                current_priority=Process_Set{1,location}.CURRENT_PRIORITY; 
-            end
+    for i = 1:numel(Ready_Processes_set)
+        for j = 1:SYSTEM_NUMBER_OF_PROCESS
+                if Ready_Processes_set(i) == Process_Set{1,j}.ID
+                    if Process_Set{1,j}.CURRENT_PRIORITY > Current_Process.CURRENT_PRIORITY
+                        CP = Process_Set{1,j};
+                        RP =  Process_Set{1,j}.ID;
+                    else
+                        CP = Current_Process;
+                        RP = Current_Process.ID;
+                    end
+                else
+                    continue;
+                end
         end
     end
-    Running_Processes_set{1,1}=running_process;
+    Current_Process = CP;
+    Running_Processes_set = RP;
 end
