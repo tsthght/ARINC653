@@ -44,24 +44,25 @@ CURRENT_PARTITION_STATUS.OPERATING_MODE=0;
 CURRENT_PARTITION_STATUS.LOCK_LEVEL=0;
 
 global Process_Set
-Process_Set = cell(1,255);
+Process_Set = cell(0);
  
 global Process_Waiting_Resource_Set
-Process_Waiting_Resource_Set= cell(1,255);
+Process_Waiting_Resource_Set= [];
 global Ready_Processes_set
-Ready_Processes_set=cell(1,255);
+Ready_Processes_set=[];
 global Dormant_Processes_set
-Dormant_Processes_set=cell(1,255);
+Dormant_Processes_set=[];
 global Running_Processes_set;
-Running_Processes_set=cell(1,255);
+Running_Processes_set=[];
 global Waiting_Processes_set
-Waiting_Processes_set=cell(1,255);
+Waiting_Processes_set=[];
+
 
 %  global BUFFER_ATTRIBUTE;
  global Buffer_set
 Buffer_set = cell(0);
 global Waiting_Buffer_Set
-Waiting_Buffer_Set = cell(0);
+Waiting_Buffer_Set = [];
 global Buffer_name_set;
 Buffer_name_set = cell(0);
 global Buffer_id_set;
@@ -106,4 +107,16 @@ Previous_Process.BASE_PRIORITY=0;
 Previous_Process.DEADLINE=30;
 Previous_Process.NAME=3;
 
+global MAX_NUMBER_OF_PROCESS
+MAX_NUMBER_OF_PROCESS = 255;
 
+global PROCESS_NAME_SET
+ PROCESS_NAME_SET = cell(0);
+ global PROCESS_ID_SET
+ PROCESS_ID_SET = [];
+
+ global   BUFFER_STATUS
+   BUFFER_STATUS.NB_MESSAGE=0;        
+   BUFFER_STATUS.MAX_NB_MESSAGE=0;   
+   BUFFER_STATUS.MAX_MESSAGE_SIZE=0;    
+   BUFFER_STATUS.WAITING_PROCESSES=0;

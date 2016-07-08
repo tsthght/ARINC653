@@ -13,20 +13,15 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
         global BUFFER_ATTRIBUTE
         global Process_Set
         global SYSTEM_LIMIT_NUMBER_OF_BUFFERS
+        global OPERATING_MODE_TYPE
+        global Buffer_set;
   		if INVALID_ID(BUFFER_ID)==0 
           
-			RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
+			RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
 			return;
         end
-        
-% 		if(~(@.<ID:BUFFER_ID> : Buffer_Set))
-% 		{	
-% 			*RETURN_CODE = INVALID_PARAM;
-% 			return;
-% 		}
-% 		
-% 		Buff.<ID:BUFFER_ID>:Buffer_Set;
-  		
+
+  		 
 		if INVALID_LENGTH(LENGTH, BUFFER_ATTRIBUTE.MAX_MESSAGE_SIZE)==1
 		    
 			RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
@@ -45,7 +40,9 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
 			return;
         end
   		
-  		BUFF=Waiting_Buffer_Set{BUFFER_ID,1};
+        index=FIND_BUFFER_INDEX( BUFFER_ID );
+    
+  		BUFF=Buffer_set{1,index};
       	if BUFF.NB_MESSAGE < BUFF.MAX_NB_MESSAGE 
          
             if BUFF.WAITING_PROCESSES == 0 && BUFF.NB_MESSAGE == 0 
@@ -55,11 +52,13 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
 %                       BUFF.FIRST_MESSAGE.MESSAGE_ADDR + TEMP_LENGTH  = MESSAGE_ADDR + TEMP_LENGTH;
                     TEMP_LENGTH = TEMP_LENGTH + 1;
                 end
-                BUFF.FIRST_MESSAGE.LENGTH = LENGTH;
+%                 BUFF.FIRST_MESSAGE.LENGTH = LENGTH;
             
             else
             
-%                   WBPro.<BUFFER_ID:Buff.ID, WAIT_TYPE:RECEIVING, INDEX:1> :  Waiting_Buffer_Set;
+%                 WBPro.<BUFFER_ID:Buff.ID, WAIT_TYPE:RECEIVING, INDEX:1> :  Waiting_Buffer_Set;
+                WBPro_ID=Waiting_Buffer_Set(1);
+                
                 
                 while TEMP_LENGTH < LENGTH  
                 
@@ -71,21 +70,9 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
 %                   
 %                       _STOP_TIME_COUNTER(Timer); 
            
-               
-                for j=1:SYSTEM_LIMIT_NUMBER_OF_BUFFERS 
-                    if ~isempty( Waiting_Buffer_Set{1,j} )
-                        i = j;
-                    end
-                end
-            
-                id = Waiting_Buffer_Set{1,i}.ID;
-                for i= 1:SYSTEM_LIMIT_NUMBER_OF_BUFFERS 
-                    if id == Process_Set{1,i}.ID
-                        PRO = Process_Set{1,i};
-                        break;
-                    end
-                end
-                
+%                 index=FIND_PROCESS(WBPro_ID);
+%                 PRO = Process_Set{1,index};
+                PRO=FIND_PROCESS(WBPro_ID)
                 PRO.PROCESS_STATE = PROCESS_STATE_TYPE.READY;
               
                 Ready_Processes_set{1,length(Ready_Processes_set)+1} = PRO.ID;
@@ -93,11 +80,12 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
                 Locate = find(PRO.ID);
                 Waiting_Processes_set(Locate) = [];
                 
-%                   if(Current_Partition_STATUS.LOCK_LEVEL == 0)
-%                   _Ask_For_Process_Scheduling();
-%           }
-                 RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
-                 return;
+                if(Current_Partition_STATUS.LOCK_LEVEL == OPERATING_MODE_TYPE.IDLE)
+                   Ask_For_Process_Scheduling = 1;
+          
+                   RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
+                   return;
+                end
             end
         
         elseif(TIME_OUT == 0)
@@ -118,7 +106,7 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
                  
                   BUFF.LAST_SEND_INDEX = BUFF.LAST_SEND_INDEX + 1;
             
-%             _Ask_For_Process_Scheduling();
+                  Ask_For_Process_Scheduling=1;
             
                   RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
                   return;
@@ -135,19 +123,20 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
             
 %             CREATE_TIME_COUNTER(TIME_OUT, PRO.ID, *Time_Out_Signal);
             
-%             _Ask_For_Process_Scheduling();      
+             Ask_For_Process_Scheduling=1;      
 %             
             if(Time_Out_Signal == TRUE)
             
-                RETURN_CODE = PROCESS_STATE_TYPE.TIMED_OUT;
+                RETURN_CODE = RETURN_CODE_TYPE.TIMED_OUT;
                 return;
             
             else
             
-                RETURN_CODE = PROCESS_STATE_TYPE.NO_ERROR;
+                RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
                 return;
             end
         end
-         
+        
+        RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
 
 
