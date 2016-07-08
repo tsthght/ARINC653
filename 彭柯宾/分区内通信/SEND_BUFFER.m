@@ -46,32 +46,19 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
       	if BUFF.NB_MESSAGE < BUFF.MAX_NB_MESSAGE 
          
             if BUFF.WAITING_PROCESSES == 0 && BUFF.NB_MESSAGE == 0 
-             
-                while TEMP_LENGTH < LENGTH  
+                 COPY(BUFFER_ID,MESSAGE_ADDR,LENGTH);
+                 Buffer_set{1,index}.NB_MESSAGE = Buffer_set{1,index}.NB_MESSAGE + 1;
                  
-%                       BUFF.FIRST_MESSAGE.MESSAGE_ADDR + TEMP_LENGTH  = MESSAGE_ADDR + TEMP_LENGTH;
-                    TEMP_LENGTH = TEMP_LENGTH + 1;
-                end
-%                 BUFF.FIRST_MESSAGE.LENGTH = LENGTH;
-            
+                
             else
             
 %                 WBPro.<BUFFER_ID:Buff.ID, WAIT_TYPE:RECEIVING, INDEX:1> :  Waiting_Buffer_Set;
                 WBPro_ID=Waiting_Buffer_Set(1);
                 
+                COPY(BUFFER_ID,MESSAGE_ADDR,LENGTH);
+                 Buffer_set{1,index}.NB_MESSAGE = Buffer_set{1,index}.NB_MESSAGE + 1;
                 
-                while TEMP_LENGTH < LENGTH  
-                
-%                        WBPro.MESSAGE_ADDR + TEMP_LENGTH  =  MESSAGE_ADDR + TEMP_LENGTH ;
-                    TEMP_LENGTH = TEMP_LENGTH + 1;
-                end
-                
-%                   if(Timer.<ID:WBPro.ID> : Waiting_Timer_Set)
-%                   
-%                       _STOP_TIME_COUNTER(Timer); 
-           
-%                 index=FIND_PROCESS(WBPro_ID);
-%                 PRO = Process_Set{1,index};
+%               
                 PRO=FIND_PROCESS(WBPro_ID)
                 PRO.PROCESS_STATE = PROCESS_STATE_TYPE.READY;
               

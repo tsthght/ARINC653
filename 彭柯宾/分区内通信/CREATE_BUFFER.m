@@ -69,7 +69,9 @@ function [BUFFER_ID,RETURN_CODE]=CREATE_BUFFER(BUFFER_NAME,MAX_MESSAGE_SIZE,MAX_
         %Waiting_Buffer_Set{1,index} = BUF;
         Buffer_name_set{1,index} = BUFFER_NAME;
         Buffer_id_set(index) = BUFFER_ID;
-
+         
+        global BUFFER
+        BUFFER{length(Buffer_id_set),1} = BUFFER_ATTRIBUTE;
                
        
         BUFFER_ATTRIBUTE.ID = BUFFER_ID;
