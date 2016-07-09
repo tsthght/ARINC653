@@ -1,5 +1,9 @@
 function SYSTEM_CALL(systemcall_id)
 
+%系统初始化，构造进程环境，配置文件
+%ARINC653 调度案例
+%Linux 调度
+
 global System_Call_Table;
 global PARA_REG1;
 global PARA_REG2;
