@@ -53,17 +53,17 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
             else
             
 %                 WBPro.<BUFFER_ID:Buff.ID, WAIT_TYPE:RECEIVING, INDEX:1> :  Waiting_Buffer_Set;
-                WBPro_ID=Waiting_Buffer_Set(1);
+%                 WBPro_ID=Waiting_Buffer_Set(1);
                 
                 COPY(BUFFER_ID,MESSAGE_ADDR,LENGTH);
                  Buffer_set{1,index}.NB_MESSAGE = Buffer_set{1,index}.NB_MESSAGE + 1;
                 
 %               
-                PRO=FIND_PROCESS(WBPro_ID)
+%                 PRO=FIND_PROCESS(WBPro_ID)
                 PRO.PROCESS_STATE = PROCESS_STATE_TYPE.READY;
               
-                Ready_Processes_set{1,length(Ready_Processes_set)+1} = PRO.ID;
-                Waiting_Processes_set{1,length(Waiting_Processes_set)+1} = PRO.ID;
+%                 Ready_Processes_set{1,length(Ready_Processes_set)+1} = PRO.ID;
+%                 Waiting_Processes_set{1,length(Waiting_Processes_set)+1} = PRO.ID;
                 Locate = find(PRO.ID);
                 Waiting_Processes_set(Locate) = [];
                 
@@ -80,12 +80,12 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
               RETURN_CODE = RETURN_CODE_TYPE.NO_AVAILABLE;
               return;
         
-        elseif Current_Partition_STATUS.LOCK_LEVEL ~= 0 || PRO.ID == ERROR_HANDLER_PROCESS_ID
+%         elseif Current_Partition_STATUS.LOCK_LEVEL ~= 0 || PRO.ID == ERROR_HANDLER_PROCESS_ID
         
                 RETURN_CODE = PROCESS_STATE_TYPE.INVALID_MODE;
                 return;
         
-        elseif(TIME_OUT == INFINITE_TIME_VALUE)
+%         elseif(TIME_OUT == INFINITE_TIME_VALUE)
                   PRO.PROCESS_STATE = RETURN_CODE_TYPE.WAITING;
                   Running_Processes_set (Locate) = [];
                   Waiting_Processes_set (length(Waiting_Processes_set)+1) = PRO.ID;
@@ -101,12 +101,12 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
         else
         
             PRO.PROCESS_STATE = PROCESS_STATE_TYPE.WAITING;
-            Running_Process_Set(Locate) = [];
-            Waiting_Process_Set(length(Waiting_Process_Set)+1) = PRO.ID;
+%             Running_Process_Set(Locate) = [];
+%             Waiting_Process_Set(length(Waiting_Process_Set)+1) = PRO.ID;
             
 %             Waiting_Buffer_Set ++ {<Current_Process.ID, Buff.ID, SENDING, 
 %                                     MESSAGE_ADDR, LENGTH, Buff.LAST_SEND_INDEX + 1>};
-            BUFF.LAST_SEND_INDEX = BUFF.LAST_SEND_INDEX + 1;
+%             BUFF.LAST_SEND_INDEX = BUFF.LAST_SEND_INDEX + 1;
             
 %             CREATE_TIME_COUNTER(TIME_OUT, PRO.ID, *Time_Out_Signal);
             

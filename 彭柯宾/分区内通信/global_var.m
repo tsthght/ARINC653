@@ -79,8 +79,9 @@ Current_Partition_Timer=cell(1,255);
 global ERROR_HANDLER_PROCESS_ID;
 ERROR_HANDLER_PROCESS_ID=0;
 global INFINITE_TIME_VALUE;
-INFINITE_TIME_VALUE=-1;
-
+INFINITE_TIME_VALUE=0;
+global Time_Out_Signal
+Time_Out_Signal = 1;
 global Current_Process
 Current_Process.ID=6;
 Current_Process.DEADLINE_TIME=10;
@@ -137,4 +138,5 @@ global PROCESS_NAME_SET
  
  global BUFFER
  BUFFER = cell(MAX_NUMBER_OF_PROCESS);
- 
+ global TIMER_TYPE
+ TIMER_TYPE.TRUE=0;

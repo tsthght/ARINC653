@@ -7,6 +7,9 @@ function [RETURN_CODE]=RECEIVE_BUFFER ( BUFFER_ID,TIME_OUT, MESSAGE_ADDR )
         global RETURN_CODE_TYPE;
         global Buffer_set;
         global Current_Partition_STATUS
+        global INFINITE_TIME_VALUE;
+        global Time_Out_Signal
+
   		if INVALID_ID(BUFFER_ID)==0
  			
 			RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
@@ -46,7 +49,7 @@ if BUFF.NB_MESSAGE ~= 0
             end
              
             index=FIND_BUFFER_INDEX( BUFFER_ID );
-            if(index ~= 1)
+            if(index <= 0)
             
                 TEMP_LENGTH = 0;
                 
@@ -78,7 +81,7 @@ if BUFF.NB_MESSAGE ~= 0
             
  
                  RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
-            end  
+              
 elseif TIME_OUT == 0
         
             LENGTH = 0;
@@ -110,12 +113,12 @@ elseif TIME_OUT == INFINITE_TIME_VALUE
 else
         
             PRO.PROCESS_STATE = PROCESS_STATE_TYPE.WAITING;
-            RUNNING_PROCESS_SET(Locate)=[];
-            WAITING_PROCESS_SET(length(WAITING_PROCESS_SET)+1) = PRO.ID;;
+%             RUNNING_PROCESS_SET(Locate)=[];
+%             WAITING_PROCESS_SET(length(WAITING_PROCESS_SET)+1) = PRO.ID;;
             
 %             Waiting_Buffer_Set ++ {<Current_Process.ID, Buff.ID, RECEVING, 
 %                                     MESSAGE_ADDR, LENGTH, Buff.LAST_RECEVIE_INDEX + 1>};
-            BUFF.LAST_RECEVIE_INDEX = BUFF.LAST_RECEVIE_INDEX + 1;
+%             BUFF.LAST_RECEVIE_INDEX = BUFF.LAST_RECEVIE_INDEX + 1;
             
 %             _CREATE_TIME_COUNTER(TIME_OUT, Current_Process.ID, *Time_Out_Signal);
             
