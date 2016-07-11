@@ -49,7 +49,6 @@ elseif TIME_OUT == INFINITE_TIME_VALUE
     Current_Process.PROCESS_STATE = PROCESS_STATE_TYPE.WAITING;
     INSERT_INTO_WAITING(Current_Process.ID);
     INSERT_INTO_EVENT_PROCESS_QUEUE(Current_Process.ID,EVENT_ID);
-    Waiting_Event_Set{EVENT_ID,}
     RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
     return;
     
