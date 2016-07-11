@@ -54,7 +54,7 @@ if Current_Partition_STATUS.OPERATING_MODE == OPERATING_MODE_TYPE.NORMAL
     return;
 end
        
-ID = numel(Semaphore_Set)+1;
+ID = CREATE_SEMAPHORE_ID();
 
 SEMA = SEMAPHORE_ATTRIBUTE_TYPE(0,0,0,0,0,0);      
 SEMA.NAME = SEMAPHORE_NAME; 
@@ -65,9 +65,11 @@ SEMA.MAXIMUM_VALUE = MAXIMUM_VALUE;
 SEMA.WAITING_PROCESSES = 0;
 SEMA.SEMAPHORE_QUEUE = [];
         
-Semaphore_Set{1,ID} = SEMA;
-Semaphore_NAME_Set(ID) = SEMA.NAME;
-Semaphore_ID_Set(ID) = SEMA.ID;
+index = numel(Semaphore_Set)+1;
+
+Semaphore_Set{1,index} = SEMA;
+Semaphore_NAME_Set(index) = SEMA.NAME;
+Semaphore_ID_Set(index) = SEMA.ID;
         
 SEMAPHORE_ID = SEMA.ID;
 RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
