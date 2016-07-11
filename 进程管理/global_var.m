@@ -55,7 +55,7 @@ ERROR_HANDLER_PROCESS_ID = 0;
 global INFINITE_TIME_VALUE;
 INFINITE_TIME_VALUE=-1;
 
-global Current_Process
+global Current_Process;
 Current_Process.ID=6;
 Current_Process.DEADLINE_TIME=10;
 Current_Process.CURRENT_PRIORITY =3;
@@ -151,3 +151,6 @@ MAX_EVENT_WAITING_PROCESSES = 4;
 
 global PROCESS_SCHEDULING_FLAG;
 PROCESS_SCHEDULING_FLAG = 0;
+
+global PCCounter;
+PCCounter = 0;
