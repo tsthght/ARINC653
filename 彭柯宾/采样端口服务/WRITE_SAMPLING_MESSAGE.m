@@ -26,7 +26,7 @@ global MAX_NUMBER_OF_PROCESS;
     		return;
         end
         
-        
+        COPY( SAMPLING_PORT_ID,MESSAGE_ADDR,LENGTH );
 
     	Index = find_index(SAMPLING_PORT_ID);
   		if(Sampling_Set{1,Index}.PORT_DIRECTION ~= PORT_DIRECTION_TYPE.SOURCE)
@@ -35,14 +35,15 @@ global MAX_NUMBER_OF_PROCESS;
     		return;
         end
         
+      
         
         
-  		while(TEMP_LENGTH < LENGTH )
-		     
-            TEMP_LENGTH = MESSAGE_ADDR + TEMP_LENGTH;
-  			SPort.MESSAGE_ADDR = TEMP_LENGTH ;
-  			TEMP_LENGTH = TEMP_LENGTH + 1;
-        end
+%   		while(TEMP_LENGTH < LENGTH )
+% 		     
+%             TEMP_LENGTH = MESSAGE_ADDR + TEMP_LENGTH;
+%   			SPort.MESSAGE_ADDR = TEMP_LENGTH ;
+%   			TEMP_LENGTH = TEMP_LENGTH + 1;
+%         end
 	
 		RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
 		

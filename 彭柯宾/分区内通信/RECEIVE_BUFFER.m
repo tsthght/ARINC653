@@ -38,7 +38,7 @@ function [RETURN_CODE]=RECEIVE_BUFFER ( BUFFER_ID,TIME_OUT, MESSAGE_ADDR )
   		BUFF=Buffer_set{1,index};
         
 if BUFF.NB_MESSAGE ~= 0 
-             fprintf('ddd\n');
+             
             LENGTH  = PASTE(BUFFER_ID,MESSAGE_ADDR);
       
             if BUFF.NB_MESSAGE > 1

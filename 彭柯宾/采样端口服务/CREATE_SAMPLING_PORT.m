@@ -6,9 +6,9 @@ function [ SAMPLING_PORT_ID,RETURN_CODE ] = CREATE_SAMPLING_PORT(SAMPLING_PORT_N
     global Current_Partition_STATUE;
     global OPERATING_MODE_TYPE;
     global MAX_NUMBER_OF_PROCESS;
-    
-  
-		if(INVALID_NAME(SAMPLING_PORT_NAME))
+    global SAMPING_PORT
+   
+		if(INVALID_NAME(SAMPLING_PORT_NAME)==1)
   		    
 			RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
 			return;
@@ -54,7 +54,7 @@ function [ SAMPLING_PORT_ID,RETURN_CODE ] = CREATE_SAMPLING_PORT(SAMPLING_PORT_N
         end
         
    		if(SAMPLING_PORT_NAME ~= SPortTable.SAMPLING_PORT_NAME)
-   			
+   			 
    			RETURN_CODE = RETURN_CODE_TYPE.INVALID_CONFIG;
    			return;
         end
@@ -64,7 +64,7 @@ function [ SAMPLING_PORT_ID,RETURN_CODE ] = CREATE_SAMPLING_PORT(SAMPLING_PORT_N
    			RETURN_CODE = RETURN_CODE_TYPE.INVALID_MODE;
    			return;
         end
-      
+     
  		global Sampling_Set;
 
         SAMPLING_PORT_ATTRIBUTE.ID=round( 1+MAX_NUMBER_OF_PROCESS *rand(1,1) );
@@ -76,6 +76,7 @@ function [ SAMPLING_PORT_ID,RETURN_CODE ] = CREATE_SAMPLING_PORT(SAMPLING_PORT_N
          for i = 1:MAX_NUMBER_OF_PROCESS 
             if isempty( Sampling_Set{1,i} )
                 Sampling_Set{1,i} = SPort;
+                SAMPING_PORT{i,1} = SPort;
                 SYSTEM_NUMBER_OF_SAMPLING_PORTS = SYSTEM_NUMBER_OF_SAMPLING_PORTS+1;
                break;
             end

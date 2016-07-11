@@ -1,5 +1,5 @@
 global System_Call_Table;
-System_Call_Table = cell(1,54);
+System_Call_Table = cell(1,57);
 System_Call_Table{1,1} = struct('ID',1,'NAME','SYS_GET_PARTITION_STATUS');
 System_Call_Table{1,2} = struct('ID',2,'NAME','SYS_SET_PARTITION_MODE');
 System_Call_Table{1,3} = struct('ID',3,'NAME','SYS_GET_PROCESS_ID');

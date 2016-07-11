@@ -1,4 +1,4 @@
-function [ LENGTH,VALIDITY,RETURN_CODE ] = READ_SAMPLING_MESSAGE( SAMPLING_PORT_ID,MESSAGE_ADDR )
+function [ LENGTH,VALIDITY,RETURN_CODE ] = READ_SAMPLING_MESSAGE( SAMPLING_PORT_ID,DES_SAMPLING_PORT_ID,MESSAGE_ADDR )
 %UNTITLED 此处显示有关此函数的摘要
 %   此处显示详细说明
 global RETURN_CODE_TYPE
@@ -28,9 +28,9 @@ global VALIDITY_TYPE
 %   		SPort = SAMPLING_PORT(SAMPLING_PORT_ATTRIBUTE.ID,SAMPLING_PORT_ATTRIBUTE.LAST_MSG_VALIDITY);
 	
   		
-        Index = find_index(SAMPLING_PORT_ID);
+        Index = find_index(DES_SAMPLING_PORT_ID);
   		if(Sampling_Set{1,Index}.PORT_DIRECTION ~= PORT_DIRECTION_TYPE.DESTINATION)
-    		
+    		fprintf('sss\n');
     		RETURN_CODE = RETURN_CODE_TYPE.INVALID_MODE;
     		return;
         end
@@ -46,13 +46,13 @@ global VALIDITY_TYPE
   		
   		else
   		
-    		while(TEMP_LENGTH < SPORT.LENGTH )
-			
-%   			*(MESSAGE_ADDR + TEMP_LENGTH) = *(SPort.MESSAGE_ADDR + TEMP_LENGTH);
-  				TEMP_LENGTH = TEMP_LENGTH + 1;
-            end
+%     		while(TEMP_LENGTH < SPORT.LENGTH )
+% 			
+% %   			*(MESSAGE_ADDR + TEMP_LENGTH) = *(SPort.MESSAGE_ADDR + TEMP_LENGTH);
+%   				TEMP_LENGTH = TEMP_LENGTH + 1;
+%             end
     	
-    		LENGTH = SPORT.LENGTH;
+    		LENGTH = PASTE( SAMPLING_PORT_ID,DES_SAMPLING_PORT_ID,MESSAGE_ADDR )
     		VALIDITY = VALIDITY_TYPE.VALID;
 %     		if(age of the copied message is consistent with the required REFRESH_PERIOD
 % 				attribute of the port)
