@@ -56,31 +56,10 @@ global INFINITE_TIME_VALUE;
 INFINITE_TIME_VALUE=-1;
 
 global Current_Process;
-Current_Process.ID=6;
-Current_Process.DEADLINE_TIME=10;
-Current_Process.CURRENT_PRIORITY =3;
-Current_Process.PROCESS_STATE =0;
-Current_Process.PERIOD =0;
-Current_Process.TIME_CAPACITY =5;
-Current_Process.ENTRY_POINT =20;
-Current_Process.STACK_SIZE =200;
-Current_Process.BASE_PRIORITY =0;
-Current_Process.DEADLINE=30;
-Current_Process.NAME =4;
+Current_Process = [];
 
 global Previous_Process
-Previous_Process.ID=5;
-Previous_Process.DEADLINE_TIME=10;
-Previous_Process.CURRENT_PRIORITY=3;
-Previous_Process.PROCESS_STATE=1;
-Previous_Process.PERIOD=-1;
-Previous_Process.TIME_CAPACITY=5;
-Previous_Process.ENTRY_POINT=20;
-Previous_Process.STACK_SIZE=200;
-Previous_Process.BASE_PRIORITY=0;
-Previous_Process.DEADLINE=30;
-Previous_Process.NAME=3;
-
+Previous_Process = [];
 
 global Idel_Process
 Idel_Process.ID=-1;
