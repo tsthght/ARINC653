@@ -1,7 +1,7 @@
 global HealthMonitor_Set
-HealthMonitor_Set=cell(1,255);
+HealthMonitor_Set=[];
 global Error_Process
-Error_Process=cell(1,255);
+Error_Process=[];
 
 
 ERROR_PROCESS1 = ERROR_PROCESS_ATTRIBUTE_TYPE (4,5,3,20);
