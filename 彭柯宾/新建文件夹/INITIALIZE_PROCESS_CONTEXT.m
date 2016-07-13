@@ -1,0 +1,4 @@
+function INITIALIZE_PROCESS_CONTEXT()
+
+end
+

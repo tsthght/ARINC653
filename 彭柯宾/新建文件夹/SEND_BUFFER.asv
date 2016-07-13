@@ -22,25 +22,25 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
         end
 
   		 
-		if INVALID_LENGTH_OF_PARTATION(LENGTH, BUFFER_ATTRIBUTE.MAX_MESSAGE_SIZE)==1
+		if INVALID_LENGTH(LENGTH, BUFFER_ATTRIBUTE.MAX_MESSAGE_SIZE)==1
 		    
 			RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
 			return;
         end
         
-		if INVALID_MESSAGE_ADDR_OF_PARTATION(MESSAGE_ADDR) == 1
+		if INVALID_MESSAGE_ADDR(MESSAGE_ADDR) == 1
 		    
 			RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
 			return;
         end
         
-		if INVALID_TIME_OUT_OF_PARTATION(TIME_OUT) 
+		if INVALID_TIME_OUT(TIME_OUT) 
 		    
 			RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
 			return;
         end
   		
-        index=FIND_BUFFER_INDEX_OF_PARTATION( BUFFER_ID );
+        index=FIND_BUFFER_INDEX( BUFFER_ID );
     
   		BUFF=Buffer_set{1,index};
       	if BUFF.NB_MESSAGE < BUFF.MAX_NB_MESSAGE 
@@ -55,7 +55,7 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
 %                 WBPro.<BUFFER_ID:Buff.ID, WAIT_TYPE:RECEIVING, INDEX:1> :  Waiting_Buffer_Set;
 %                 WBPro_ID=Waiting_Buffer_Set(1);
                 
-                COPY_OF_PARTATION(BUFFER_ID,MESSAGE_ADDR,LENGTH);
+                COPY(BUFFER_ID,MESSAGE_ADDR,LENGTH);
                  Buffer_set{1,index}.NB_MESSAGE = Buffer_set{1,index}.NB_MESSAGE + 1;
                 
 %               
@@ -64,7 +64,7 @@ function [RETURN_CODE]=SEND_BUFFER (BUFFER_ID,MESSAGE_ADDR,LENGTH,TIME_OUT)
               
 %                 Ready_Processes_set{1,length(Ready_Processes_set)+1} = PRO.ID;
 %                 Waiting_Processes_set{1,length(Waiting_Processes_set)+1} = PRO.ID;
-                Locate = find_OF_PARTATION(PRO.ID);
+                Locate = find(PRO.ID);
                 Waiting_Processes_set(Locate) = [];
                 
                 if(Current_Partition_STATUS.LOCK_LEVEL == OPERATING_MODE_TYPE.IDLE)
