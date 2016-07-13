@@ -1,7 +1,0 @@
-
-
-    global RETURN_CODE_TYPE;
-       
-            
-  RETURN_CODE_TYPE=struct('NO_ERROR',0,'NO_ACTION',1,'NOT_AVAILABLE',2,'INVALID_PARAM',3,'INVALID_CONFIG',4,'INVALID_MODE',5,'TIMED_OUT',6);    
-       
