@@ -1,10 +1,10 @@
 function [RETURN_CODE]=CREATE_PROCESS(ATTRIBUTES)
-         global Process_ID_Set;  
+    
          global RETURN_CODE_TYPE;
          global PROCESS_STATE_TYPE;
          global Process_Set;
          global Dormant_Processes_set;
-         global MAX_NUMBER_OF_PROCESS
+         global MAX_NUMBER_OF_PROCESSES;
          global MIN_PRIORITY_VALUE;
          global MAX_PRIORITY_VALUE;
          global SYSTEM_TIME_TYPE;
@@ -12,10 +12,9 @@ function [RETURN_CODE]=CREATE_PROCESS(ATTRIBUTES)
          global OPERATING_MODE_TYPE;
          global PROCESS_NAME_SET;
          global PROCESS_ID_SET;
-%          global OPERATING_MODE_TYPE;
-%          global CURRENT_PARTITION_STATUS;
+         global SYSTEM_NUMBER_OF_PROCESSES;
 
-         if NUMBER_OF_PROCESS() == MAX_NUMBER_OF_PROCESS
+         if SYSTEM_NUMBER_OF_PROCESSES == MAX_NUMBER_OF_PROCESSES
              RETURN_CODE = RETURN_CODE_TYPE.INVALID_CONFIG;
              return;
          end
@@ -25,7 +24,7 @@ function [RETURN_CODE]=CREATE_PROCESS(ATTRIBUTES)
              return;
          end
          
-         if ATTRIBUTES.STACK_SIZE<0 || ATTRIBUTES.STACK_SIZE>MAX_NUMBER_OF_PROCESS %全局变量来代替数值
+         if ATTRIBUTES.STACK_SIZE<0 || ATTRIBUTES.STACK_SIZE > MAX_NUMBER_OF_PROCESSES
              RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;
              return;
          end
@@ -60,7 +59,9 @@ function [RETURN_CODE]=CREATE_PROCESS(ATTRIBUTES)
 %                 L = L+1;
 %             end
 %         end
-        id =  round( 1+(MAX_NUMBER_OF_PROCESS-1) *rand(1,1) );
+        id =  round( 1+(MAX_NUMBER_OF_PROCESSES-1) *rand(1,1) );
+        
+        SYSTEM_NUMBER_OF_PROCESSES = SYSTEM_NUMBER_OF_PROCESSES+1;
        
         DORMANT = PROCESS_STATE_TYPE.DORMANT;
         
