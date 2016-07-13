@@ -52,7 +52,7 @@ global VALIDITY_TYPE
 %   				TEMP_LENGTH = TEMP_LENGTH + 1;
 %             end
     	
-    		LENGTH = PASTE( SAMPLING_PORT_ID,DES_SAMPLING_PORT_ID,MESSAGE_ADDR )
+    		LENGTH = PASTE_OF_SAMPLING( SAMPLING_PORT_ID,DES_SAMPLING_PORT_ID,MESSAGE_ADDR )
     		VALIDITY = VALIDITY_TYPE.VALID;
 %     		if(age of the copied message is consistent with the required REFRESH_PERIOD
 % 				attribute of the port)
