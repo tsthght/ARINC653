@@ -6,7 +6,6 @@ global MAX_NUMBER_OF_EVENTS;
 global RETURN_CODE_TYPE;
 global OPERATING_MODE_TYPE;
 global Current_Partition_STATUS;
-global Waiting_Event_Set;
 
 if EVENT_NAME_EXIST(EVENT_NAME)==1
     EVENT_ID = -1;
@@ -36,7 +35,6 @@ EVENT_ID = CREATE_EVENT_ID();
 Event_Set{1,numel(Event_Set)+1}= Event_TYPE(EVENT_ID,EVENT_NAME,0,[]);
    
 SYSTEM_NUMBER_OF_EVENTS = SYSTEM_NUMBER_OF_EVENTS + 1;
-Waiting_Event_Set = cell(SYSTEM_NUMBER_OF_EVENTS,0);
 
 RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
 

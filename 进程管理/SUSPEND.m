@@ -1,10 +1,10 @@
 function [RETURN_CODE] = SUSPEND (PROCESS_ID)
 
-global Process_Set
-global PROCESS_STATE_TYPE
-global RETURN_CODE_TYPE
-global Current_Partition_STATUS
-global ERORR_HANDLER_PROCESS_ID
+global Process_Set;
+global PROCESS_STATE_TYPE;
+global RETURN_CODE_TYPE;
+global Current_Partition_STATUS;
+global NULL_PROCESS_ID;
 global Current_Process;
 
 
@@ -17,7 +17,7 @@ if INVALID_ID(PROCESS_ID) == 0 || Current_Process.ID == PROCESS_ID
 end
 
 %判断模式是否异常
-if Current_Partition_STATUS.LOCK_LEVEL~=0 && PROCESS_ID == ERORR_HANDLER_PROCESS_ID
+if Current_Partition_STATUS.LOCK_LEVEL~=0 && PROCESS_ID == NULL_PROCESS_ID
     RETURN_CODE = RETURN_CODE_TYPE.INVALID_MODE;
     return;
 end

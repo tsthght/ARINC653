@@ -12,7 +12,6 @@ global SYSTEM_NUMBER_OF_EVENTS;
 global SYSTEM_MAX_TIMEOUT;
 global Waiting_Timer_Set;
 global PROCESS_SCHEDULING_FLAG;
-global Waiting_Event_Set;
 
 if EVENT_ID_EXIST(EVENT_ID) == 0
     RETURN_CODE = RETURN_CODE_TYPE.INVALID_PARAM;

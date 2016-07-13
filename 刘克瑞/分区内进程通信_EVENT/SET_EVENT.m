@@ -4,7 +4,6 @@ global Event_Set;
 global RETURN_CODE_TYPE;
 global Current_Partition_STATUS;
 global Waiting_Timer_Set;
-global Waiting_Event_Set;
 global Process_Set;
 global PROCESS_STATE_TYPE;
 global Waiting_Processes_set;

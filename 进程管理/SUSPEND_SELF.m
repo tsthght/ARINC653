@@ -1,6 +1,6 @@
 function RETURN_CODE = SUSPEND_SELF(TIME_OUT)
 
-    global ERROR_HANDLER_PROCESS_ID;
+    global NULL_PROCESS_ID;
     global INFINITE_TIME_VALUE;
     global RETURN_CODE_TYPE;
     global Current_Process;
@@ -11,7 +11,7 @@ function RETURN_CODE = SUSPEND_SELF(TIME_OUT)
     global PROCESS_SCHEDULING_FLAG;
 
    
-        if Current_Partition_STATUS.LOCK_LEVEL ~= 0 || Current_Process.ID == ERROR_HANDLER_PROCESS_ID; 
+        if Current_Partition_STATUS.LOCK_LEVEL ~= 0 || Current_Process.ID == NULL_PROCESS_ID; 
             RETURN_CODE = RETURN_CODE_TYPE.INVALID_MODE;
             return;
         end
