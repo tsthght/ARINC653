@@ -43,6 +43,12 @@ Current_Process = [];
 global Previous_Process
 Previous_Process = [];
 
+global PARA_REG1;
+PARA_REG1 = cell(255,255);
+
+global PARA_REG2;
+PARA_REG2 = cell(255,255);
+
 global LOCK_LEVEL
 LOCK_LEVEL = 0;
  
