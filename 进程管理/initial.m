@@ -6,9 +6,8 @@ ATTRIBUTES.BASE_PRIORITY=24;
 ATTRIBUTES.DEADLINE=28;
 ATTRIBUTES.NAME='eee';
 
-global Current_Partition_STATUS
-Current_Partition_STATUS.OPERATING_MODE=OPERATING_MODE_TYPE.COLD_START ;
-Current_Partition_STATUS.LOCK_LEVEL=0;
+global Current_Partition_STATUS;
+Current_Partition_STATUS = PARTITION_STATUS_TYPE(1,0.1,0.02,0,1,0);
 
 global Process_Set
 Process_Set = cell(0);

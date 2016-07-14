@@ -7,8 +7,7 @@ ATTRIBUTES.DEADLINE=28;
 ATTRIBUTES.NAME='eee';
 
 global Current_Partition_STATUS
-Current_Partition_STATUS.OPERATING_MODE=OPERATING_MODE_TYPE.COLD_START ;
-Current_Partition_STATUS.LOCK_LEVEL=0;
+Current_Partition_STATUS = PARTITION_STATUS_TYPE(1,0.1,0.02,0,1,0);
 
 global Process_Set
 Process_Set = cell(0);
@@ -42,6 +41,12 @@ Current_Process = [];
 
 global Previous_Process
 Previous_Process = [];
+
+global PARA_REG1;
+PARA_REG1 = cell(255,255);
+
+global PARA_REG2;
+PARA_REG2 = cell(255,255);
 
 global LOCK_LEVEL
 LOCK_LEVEL = 0;

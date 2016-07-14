@@ -199,7 +199,8 @@ if PROCESS_SCHEDULING_FLAG == 1
     end
     PROCESS_SCHEDULING_FLAG = 0;
 elseif PROCESS_SCHEDULING_FLAG == 0
-    PCCounter = Current_Process.ENTRY_POINT;
+    %PCCounter = Current_Process.ENTRY_POINT;
+    return;
 end
 
 end

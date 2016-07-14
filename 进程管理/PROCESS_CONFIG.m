@@ -1,0 +1,23 @@
+n = 0;
+%GET_PARTITION_STATUS
+SYSTEM_CALL(1);
+
+%SET_PARTITION_MODE
+PARA_REG1{1,1} = input('');
+SYSTEM_CALL(2);
+
+%GET_PROCESS_ID
+PARA_REG2{1,1} = input('');
+SYSTEM_CALL(3);
+
+%GET_PROCESS_STATUS
+PARA_REG1{1,1} = input('');
+SYSTEM_CALL(4);
+
+%CREATE_PROCESS
+while(n<8)
+    PARA_REG2{1,1} = ATTRIBUTES;
+    SYSTEM_CALL(5);
+    ATTRIBUTES.NAME = input('');
+    n = n+1;
+end

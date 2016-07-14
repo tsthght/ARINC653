@@ -1,4 +1,4 @@
-classdef Event_TYPE
+classdef EVENT_TYPE
     properties
         ID;
         NAME;
@@ -7,11 +7,11 @@ classdef Event_TYPE
     end
     
     methods
-        function Event = Event_TYPE(id,name,state,waiting_processes)
-                Event.ID = id;
-                Event.NAME = name;
-                Event.STATE = state;
-                Event.WAITING_PROCESSES = waiting_processes;
+        function EVENT = EVENT_TYPE(id,name,state,waiting_processes)
+                EVENT.ID = id;
+                EVENT.NAME = name;
+                EVENT.STATE = state;
+                EVENT.WAITING_PROCESSES = waiting_processes;
         end
     end
 end

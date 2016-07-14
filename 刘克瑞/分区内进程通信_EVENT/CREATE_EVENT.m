@@ -32,7 +32,7 @@ EVENT_ID = CREATE_EVENT_ID();
 
 
 
-Event_Set{1,numel(Event_Set)+1}= Event_TYPE(EVENT_ID,EVENT_NAME,0,[]);
+Event_Set{1,numel(Event_Set)+1}= EVENT_TYPE(EVENT_ID,EVENT_NAME,0,[]);
    
 SYSTEM_NUMBER_OF_EVENTS = SYSTEM_NUMBER_OF_EVENTS + 1;
 
