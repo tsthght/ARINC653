@@ -157,36 +157,14 @@ global CURRENT_PARTITION_STATUS
 CURRENT_PARTITION_STATUS.OPERATING_MODE=0;
 CURRENT_PARTITION_STATUS.LOCK_LEVEL=0;
 
-global Process_Set
-Process_Set = cell(0);
- 
-global Process_Waiting_Resource_Set
-Process_Waiting_Resource_Set= [];
-global Ready_Processes_set
-Ready_Processes_set=[];
-global Dormant_Processes_set
-Dormant_Processes_set=[];
-global Running_Processes_set;
-Running_Processes_set=[];
-global Waiting_Processes_set
-Waiting_Processes_set=[];
-
 
 %  global BUFFER_ATTRIBUTE;
- global Buffer_set
-Buffer_set = cell(0);
-global Waiting_Buffer_Set
-Waiting_Buffer_Set = [];
-global Buffer_name_set;
-Buffer_name_set = cell(0);
-global Buffer_id_set;
-Buffer_id_set = [];
+
 
 global SYSTEM_NUMBER_OF_BUFFERS
 SYSTEM_NUMBER_OF_BUFFERS = 0;
 
-global Current_Partition_Timer;
-Current_Partition_Timer=cell(1,255);
+
 
 global ERROR_HANDLER_PROCESS_ID;
 ERROR_HANDLER_PROCESS_ID=0;
@@ -230,10 +208,7 @@ SYSTEM_TIME_TYPE = 2^64;
 global MAX_NUMBER_OF_PROCESS
 MAX_NUMBER_OF_PROCESS = 255;
 
-global PROCESS_NAME_SET
- PROCESS_NAME_SET = cell(0);
- global PROCESS_ID_SET
- PROCESS_ID_SET = [];
+
 
  global   BUFFER_STATUS
    BUFFER_STATUS.NB_MESSAGE=0;        
@@ -241,11 +216,7 @@ global PROCESS_NAME_SET
    BUFFER_STATUS.MAX_MESSAGE_SIZE=0;    
    BUFFER_STATUS.WAITING_PROCESSES=0;
    
- global DATA_ZONE
- DATA_ZONE = cell(0);
- 
- global BUFFER
- BUFFER = cell(MAX_NUMBER_OF_PROCESS);
+
  global TIMER_TYPE
  TIMER_TYPE.TRUE=0;
  %port
@@ -305,10 +276,7 @@ LOCK_LEVEL = 0;
 
 global SYSTEM_NUMBER_OF_SAMPLING_PORTS
 SYSTEM_NUMBER_OF_SAMPLING_PORTS = 0;
-global Sampling_Set
-Sampling_Set = cell(1,255);
-global Sampling_obj
-Sampling_obj ={};
+
 % global SAMPLING_PORT_STATUS
 % SAMPLING_PORT_STATUS.REFRESH_PERIOD;
 % SAMPLING_PORT_STATUS.MAX_MESSAGE_SIZE; 
@@ -327,8 +295,7 @@ SPORT.LENGTH =5;
 
 
 
- global SAMPING_PORT
- SAMPING_PORT = cell(MAX_NUMBER_OF_PROCESS);
+ 
  
 
 

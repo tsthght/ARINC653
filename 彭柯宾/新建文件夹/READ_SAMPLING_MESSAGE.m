@@ -52,7 +52,7 @@ global VALIDITY_TYPE
 %   				TEMP_LENGTH = TEMP_LENGTH + 1;
 %             end
     	
-    		LENGTH = PASTE_OF_SAMPLING( SAMPLING_PORT_ID,DES_SAMPLING_PORT_ID,MESSAGE_ADDR )
+    		LENGTH = PASTE_OF_SAMPLING( SAMPLING_PORT_ID,DES_SAMPLING_PORT_ID,MESSAGE_ADDR );
     		VALIDITY = VALIDITY_TYPE.VALID;
 %     		if(age of the copied message is consistent with the required REFRESH_PERIOD
 % 				attribute of the port)
@@ -66,7 +66,7 @@ global VALIDITY_TYPE
 %       			SPort.LAST_MSG_VALIDITY = INVALID;
 %             end
     		
-    		RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR
+    		RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
     		return;
         end
 	end
