@@ -25,12 +25,7 @@ if Current_Partition_STATUS.OPERATING_MODE == OPERATING_MODE_TYPE.NORMAL
     return;
 end
 
-
-EVENT_ID = CREATE_EVENT_ID();
-
-
-
-
+EVENT_ID = GENERATE_ID();
 
 Event_Set{1,numel(Event_Set)+1}= EVENT_TYPE(EVENT_ID,EVENT_NAME,0,[]);
    

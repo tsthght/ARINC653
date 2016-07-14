@@ -59,7 +59,7 @@ function [RETURN_CODE]=CREATE_PROCESS(ATTRIBUTES)
 %                 L = L+1;
 %             end
 %         end
-        id =  round( 1+(MAX_NUMBER_OF_PROCESSES-1) *rand(1,1) );
+        id =  GENERATE_ID();
         
         SYSTEM_NUMBER_OF_PROCESSES = SYSTEM_NUMBER_OF_PROCESSES+1;
        

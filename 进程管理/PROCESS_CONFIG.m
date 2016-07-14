@@ -1,4 +1,4 @@
-n = 0;
+
 %GET_PARTITION_STATUS
 SYSTEM_CALL(1);
 
@@ -15,6 +15,7 @@ PARA_REG1{1,1} = input('');
 SYSTEM_CALL(4);
 
 %CREATE_PROCESS
+n = 0;
 while(n<8)
     PARA_REG2{1,1} = ATTRIBUTES;
     SYSTEM_CALL(5);
