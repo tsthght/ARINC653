@@ -35,7 +35,7 @@ function [RETURN_CODE] = START(PROCESS_ID)
                 INSERT_INTO_READY(PROCESS_ID);
 				Process_Set{1,location}.DEADLINE_TIME = 10 + Process_Set{1,location}.TIME_CAPACITY;% CURRENT_SYSTEM_CLOCK()				                
                 if  Current_Partition_STATUS.LOCK_LEVEL == 0
-    				PROCESS_SCHEDULING_FLAG{1,1}=1;
+    				PROCESS_SCHEDULING_FLAG = 1;
                 end                
             else
 				Process_Set{1,location}.PROCESS_STATE = PROCESS_STATE_TYPE.WAITING;

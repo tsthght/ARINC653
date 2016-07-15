@@ -15,16 +15,16 @@ classdef PROCESS_TYPE
     end
     
     methods
-        function PRO = PROCESS_TYPE(id,name,parid, deadline_tine,current_priority,process_state,period,time_capacity,entry_poin,stack_size,base_priority,deadline)
+        function PRO = PROCESS_TYPE(id,name,parid, deadline_time,current_priority,process_state,period,time_capacity,entry_point,stack_size,base_priority,deadline)
                 PRO.ID = id;
                 PRO.NAME = name;
                 PRO.PARID = parid;
-                PRO.DEADLINE_TIME = deadline_tine;
+                PRO.DEADLINE_TIME = deadline_time;
                 PRO.CURRENT_PRIORITY = current_priority;
                 PRO.PROCESS_STATE = process_state;
                 PRO.PERIOD = period;
                 PRO.TIME_CAPACITY = time_capacity;
-                PRO.ENTRY_POINT = entry_poin;
+                PRO.ENTRY_POINT = entry_point;
                 PRO.STACK_SIZE = stack_size;
                 PRO.BASE_PRIORITY = base_priority;
                 PRO.DEADLINE = deadline;
