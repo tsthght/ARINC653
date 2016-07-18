@@ -9,7 +9,8 @@ function RETURN_CODE = SUSPEND_SELF(TIME_OUT)
     global Time_Out_Signal;
     global PROCESS_STATE_TYPE;
     global PROCESS_SCHEDULING_FLAG;
-
+    global SYSTEM_NUMBER_OF_PROCESSES;
+    global Process_Set;
    
         if Current_Partition_STATUS.LOCK_LEVEL ~= 0 || Current_Process.ID == NULL_PROCESS_ID; 
             RETURN_CODE = RETURN_CODE_TYPE.INVALID_MODE;
@@ -21,7 +22,7 @@ function RETURN_CODE = SUSPEND_SELF(TIME_OUT)
     		return;
         end
   		
-  		if Current_Process.PERIOD ~= INFINITE_TIME_VALUE 
+  		if Current_Process.PERIOD ~= 0
     		RETURN_CODE = RETURN_CODE_TYPE.INVALID_MODE;
     		return;
         end
@@ -31,10 +32,22 @@ function RETURN_CODE = SUSPEND_SELF(TIME_OUT)
     		return;
         else
   			%the waiting set should be re-design
-  			Current_Process.PROCESS_STATE = PROCESS_STATE_TYPE.WAITING;	
-            if TIME_OUT ~= INFINITE_TIME_VALUE
-                TIME_COUNTER = struct('PROCESS_ID',Current_Process.ID,'DURATION',TIME_OUT,'TOS',0);
+  			for i = 1:SYSTEM_NUMBER_OF_PROCESSES
+                if Process_Set{1,i}.ID == Current_Process.ID
+                    PRO = Process_Set{1,i};
+                    index = i;
+                    break;
+                else
+                    continue;
+                end
             end
+            PRO.PROCESS_STATE = PROCESS_STATE_TYPE.WAITING;
+            Process_Set{1,index} = PRO;
+            if TIME_OUT ~= INFINITE_TIME_VALUE
+                TIME_COUNTER = struct('PROCESS_ID',Current_Process.ID,'DURATION',TIME_OUT,'TOS',round(rand(1,1)));
+            end
+            
+            Current_Process = [];
             
             PROCESS_SCHEDULING_FLAG = 1;
                 

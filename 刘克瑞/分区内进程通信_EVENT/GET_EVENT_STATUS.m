@@ -13,7 +13,7 @@ end
 for i =1:SYSTEM_NUMBER_OF_EVENTS
     if Event_Set{1,i}.ID == EVENT_ID
         EVENT_STATUS.STATE = Event_Set{1,i}.STATE;
-        EVENT_STATUS.WP = Event_Set{1,i}.WAITING_PROCESSES;
+        EVENT_STATUS.WAITING_PROCESSES = Event_Set{1,i}.WAITING_PROCESSES;
         RETURN_CODE =RETURN_CODE_TYPE.NO_ERROR;
         break;
     else

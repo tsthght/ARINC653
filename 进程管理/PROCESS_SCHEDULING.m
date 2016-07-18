@@ -1,34 +1,52 @@
 function PROCESS_SCHEDULING()
     
-    global Ready_Processes_set;
+    global Running_Processes_set;
     global Process_Set;
     global SYSTEM_NUMBER_OF_PROCESSES;
     global PCCounter;
     global Current_Process;
+    global PROCESS_STATE_TYPE;
+    
     
     if isempty(Current_Process) == 1
+        FIND_SCHEDULED_PROCESS();
         for i = 1:SYSTEM_NUMBER_OF_PROCESSES
-            if Process_Set{1,i}.ID == Ready_Processes_set(1)
-                PCCounter = Process_Set{1,i}.ENTRY_POINT;
+           if Process_Set{1,i}.ENTRY_POINT == PCCounter
+                Process_Set{1,i}.PROCESS_STATE = PROCESS_STATE_TYPE.RUNNING;
+                Current_Process = Process_Set{1,i};
+                Running_Processes_set = Process_Set{1,i}.ID;
+           else
+                continue;
+           end
+        end
+    else
+        FIND_SCHEDULED_PROCESS(); 
+        for i = 1:SYSTEM_NUMBER_OF_PROCESSES
+            if Process_Set{1,i}.ID == Current_Process.ID
+                PRO = Process_Set{1,i};
+                index = i;
             else
                 continue;
             end
         end
-        return;
-    else         
-        for i = 1:numel(Ready_Processes_set)
-            for j = 1:SYSTEM_NUMBER_OF_PROCESSES
-                    if Ready_Processes_set(i) == Process_Set{1,j}.ID
-                        if Process_Set{1,j}.CURRENT_PRIORITY > Current_Process.CURRENT_PRIORITY
-                            PCCounter = Process_Set{1,j}.ENTRY_POINT;
-                        else
-                            PCCounter = Current_Process.ENTRY_POINT;
-                        end
-                    else
-                        continue;
-                    end
-            end
-        end
-        return;
+        
+        for i = 1:SYSTEM_NUMBER_OF_PROCESSES
+           if Process_Set{1,i}.ENTRY_POINT == PCCounter
+               if Current_Process.CURRENT_PRIORITY > Process_Set{1,i}.CURRENT_PRIORITY
+                   return;
+               else
+                   PRO.PROCESS_STATE = PROCESS_STATE_TYPE.READY;
+                   Process_Set{1,index} = PRO;
+                   Process_Set{1,i}.PROCESS_STATE = PROCESS_STATE_TYPE.RUNNING;
+                   Current_Process = Process_Set{1,i};
+                   Running_Processes_set = Process_Set{1,i}.ID;
+               end
+           else
+                continue;
+           end
+        end 
     end
+        return;
+   
+   
 end

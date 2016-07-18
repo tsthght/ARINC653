@@ -8,11 +8,8 @@ global System_Call_Table;
 global PARA_REG1;
 global PARA_REG2;
 global PROCESS_SCHEDULING_FLAG;
-global SYSTEM_NUMBER_OF_PROCESSES;
-global PCCounter;
-global Process_Set;
-global Current_Process;
-global Running_Processes_set;
+
+
 
 switch(systemcall_id)
     case System_Call_Table{1,1}.ID
@@ -190,14 +187,6 @@ end
 
 if PROCESS_SCHEDULING_FLAG == 1
     PROCESS_SCHEDULING();
-    for i = 1:SYSTEM_NUMBER_OF_PROCESSES
-        if Process_Set{1,i}.ENTRY_POINT == PCCounter
-            Current_Process = Process_Set{1,i};
-            Running_Processes_set = Process_Set{1,i}.ID;
-        else
-            continue;
-        end
-    end
     PROCESS_SCHEDULING_FLAG = 0;
 elseif PROCESS_SCHEDULING_FLAG == 0
     %PCCounter = Current_Process.ENTRY_POINT;
