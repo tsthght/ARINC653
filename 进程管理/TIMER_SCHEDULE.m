@@ -1,0 +1,35 @@
+function TIMER_SCHEDULE(obj,event)
+
+%T = timer('TimerFcn',@TIMER_SCHEDULE, 'Period', 5,'executionmode','fixeddelay','TasksToExecute',100000)
+    global Running_Processes_set;
+    global Process_Set;
+    global SYSTEM_NUMBER_OF_PROCESSES;
+    global PCCounter;
+    global Current_Process;
+    global PROCESS_STATE_TYPE;
+    
+    
+        FIND_SCHEDULED_PROCESS(); 
+        for i = 1:SYSTEM_NUMBER_OF_PROCESSES
+            if Process_Set{1,i}.ID == Current_Process.ID
+                PRO = Process_Set{1,i};
+                index = i;
+            else
+                continue;
+            end
+        end
+        
+        for i = 1:SYSTEM_NUMBER_OF_PROCESSES
+           if Process_Set{1,i}.ENTRY_POINT == PCCounter
+                   PRO.PROCESS_STATE = PROCESS_STATE_TYPE.READY;
+                   Process_Set{1,index} = PRO;
+                   Process_Set{1,i}.PROCESS_STATE = PROCESS_STATE_TYPE.RUNNING;
+                   Current_Process = Process_Set{1,i};
+                   Running_Processes_set = Process_Set{1,i}.ID;
+           else
+                continue;
+           end
+        end 
+        return;
+
+end
