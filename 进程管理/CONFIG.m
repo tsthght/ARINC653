@@ -29,7 +29,6 @@ while(n<5)
     ATTRIBUTES.STACK_SIZE=round(10*rand(1,1));
     ATTRIBUTES.BASE_PRIORITY=round(239*rand(1,1));
     ATTRIBUTES.DEADLINE=round(rand(1,1));
-    n = n+1;
     PARA_REG2{1,1} = ATTRIBUTES;
     SYSTEM_CALL(5);
 end
@@ -59,8 +58,13 @@ PARA_REG1{1,1} = input('');
 SYSTEM_CALL(11);
 
 %START
-PARA_REG1{1,1} = input('');
-SYSTEM_CALL(12);
+n = 0;
+while(n < numel(Process_Set))
+    PARA_REG1{1,1} = input('');
+    SYSTEM_CALL(12);
+    n = n + 1;
+end
+
 
 %DELAYED_START
 PARA_REG1{1,1} = input('');
