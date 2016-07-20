@@ -58,13 +58,8 @@ PARA_REG1{1,1} = input('');
 SYSTEM_CALL(11);
 
 %START
-n = 0;
-while(n < numel(Process_Set))
-    PARA_REG1{1,1} = input('');
-    SYSTEM_CALL(12);
-    n = n + 1;
-end
-
+PARA_REG1{1,1} = input('');
+SYSTEM_CALL(12);
 
 %DELAYED_START
 PARA_REG1{1,1} = input('');
