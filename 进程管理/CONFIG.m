@@ -58,13 +58,11 @@ PARA_REG1{1,1} = input('');
 SYSTEM_CALL(11);
 
 %START
-n = 0;
-while(n < numel(Process_Set))
-    PARA_REG1{1,1} = input('');
+n = 1;
+while(n ~= 0)
+    PARA_REG1{1,1} = Dormant_Processes_set(1);
     SYSTEM_CALL(12);
-    n = n + 1;
 end
-
 
 %DELAYED_START
 PARA_REG1{1,1} = input('');
