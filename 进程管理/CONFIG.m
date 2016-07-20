@@ -29,7 +29,6 @@ while(n<5)
     ATTRIBUTES.STACK_SIZE=round(10*rand(1,1));
     ATTRIBUTES.BASE_PRIORITY=round(239*rand(1,1));
     ATTRIBUTES.DEADLINE=round(rand(1,1));
-    n = n+1;
     PARA_REG2{1,1} = ATTRIBUTES;
     SYSTEM_CALL(5);
 end
