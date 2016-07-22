@@ -58,8 +58,11 @@ PARA_REG1{1,1} = input('');
 SYSTEM_CALL(11);
 
 %START
-PARA_REG1{1,1} = input('');
-SYSTEM_CALL(12);
+n = 1;
+while(n ~= 0)
+    PARA_REG1{1,1} = Dormant_Processes_set(1);
+    SYSTEM_CALL(12);
+end
 
 %DELAYED_START
 PARA_REG1{1,1} = input('');
