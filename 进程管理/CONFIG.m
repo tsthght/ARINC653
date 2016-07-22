@@ -62,6 +62,9 @@ n = 1;
 while(n ~= 0)
     PARA_REG1{1,1} = Dormant_Processes_set(1);
     SYSTEM_CALL(12);
+    if numel(Dormant_Processes_set) == 0
+        return;
+    end
 end
 
 %DELAYED_START
