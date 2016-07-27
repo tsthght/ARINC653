@@ -11,7 +11,7 @@ Current_Partition_STATUS = PARTITION_STATUS_TYPE(1,0.1,0.02,0,1,0);
 
 global Process_Set
 Process_Set = cell(0);
- 
+
 global Process_Waiting_Resource_Set
 Process_Waiting_Resource_Set= [];
 
@@ -78,3 +78,6 @@ PROCESS_SCHEDULING_FLAG = 0;
 
 global PCCounter;
 PCCounter = 0;
+
+global ERROR_HANDLER_PROCESS_ID;
+ERROR_HANDLER_PROCESS_ID = NULL_PROCESS_ID;
