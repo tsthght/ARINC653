@@ -75,6 +75,94 @@ PCCounter = 0;
 global ERROR_HANDLER_PROCESS_ID;
 ERROR_HANDLER_PROCESS_ID = NULL_PROCESS_ID;
 
+global maximum_number_of_error_hander
+maximum_number_of_error_hander = 10;
+
+global HealthMonitor_Set
+HealthMonitor_Set=[];
+
+global Error_Process
+Error_Process=[];
+
+global Semaphore_Set
+Semaphore_Set = [];
+
+global Semaphore_NAME_Set
+Semaphore_NAME_Set = [];
+
+global Semaphore_ID_Set
+Semaphore_ID_Set = [];
+
+global Time_Out_Set
+Time_Out_Set = [];
+
+global TIMER_TYPE
+TIMER_TYPE.TRUE=0;
+
+global BUFFER_STATUS
+BUFFER_STATUS.NB_MESSAGE=0;        
+BUFFER_STATUS.MAX_NB_MESSAGE=0;   
+BUFFER_STATUS.MAX_MESSAGE_SIZE=0;    
+BUFFER_STATUS.WAITING_PROCESSES=0;
+  
+global DATA_ZONE
+DATA_ZONE = cell(0);
+ 
+global BUFFER
+BUFFER = cell(MAX_NUMBER_OF_PROCESS);
+
+global Blackboard_Set;
+Blackboard_Set=cell(0);
+
+global Waiting_Blackboard_Set;
+Waiting_Blackboard_Set=cell(0);
+
+global SYSTEM_NUMBER_OF_SAMPLING_PORTS
+SYSTEM_NUMBER_OF_SAMPLING_PORTS = 0;
+
+global Sampling_Set
+Sampling_Set = cell(1,255);
+
+global Sampling_obj
+Sampling_obj ={};
+
+global SPORT
+SPORT.PORT_DIRECTION=1;
+SPORT.EMPTY_INDICATOR=1;
+SPORT.LENGTH =5;
+
+global SAMPING_PORT
+SAMPING_PORT = cell(MAX_NUMBER_OF_PROCESS);
+
+global Waiting_Buffer_Set 
+Waiting_Buffer_Set = cell(8,255);
+
+global Configuration_table
+Configuration_table=cell(1,512);
+Configuration_table{1,1}.NAME='cy';
+Configuration_table{1,1}.CURRENT_PARTITION_NAME='par1';
+Configuration_table{1,1}.MAX_MESSAGE_SIZE=100;
+Configuration_table{1,1}.MAX_NB_MESSAGE=100;
+Configuration_table{1,1}.PORT_DIRECTION=0;
+
+global SYSTEM_NUMBER_OF_QUEUING_PORTS
+SYSTEM_NUMBER_OF_QUEUING_PORTS=0;
+
+global Queuing_Set
+Queuing_Set=[];
+
+global Queuing_ID_Set
+Queuing_ID_Set=[];
+
+global PARTITION_CONFIG
+PARTITION_CONFIG.NAME='par1';
+PARTITION_CONFIG.ID=1;
+
+global MAX_PREOCESS_DELAY_TIME 
+MAX_PREOCESS_DELAY_TIME = 255;
+
+global MAX_BUDGET_TIME
+MAX_BUDGET_TIME = 255;
 ATTRIBUTES.PERIOD=[];
 ATTRIBUTES.TIME_CAPACITY=[];
 ATTRIBUTES.ENTRY_POINT=[];
