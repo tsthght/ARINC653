@@ -15,6 +15,8 @@ function PROCESS_SCHEDULING()
                 Process_Set{1,i}.PROCESS_STATE = PROCESS_STATE_TYPE.RUNNING;
                 Current_Process = Process_Set{1,i};
                 Running_Processes_set = Process_Set{1,i}.ID;
+                DELETE_FROM_READY(Process_Set{1,i}.ID);
+                return;
            else
                 continue;
            end
@@ -32,14 +34,18 @@ function PROCESS_SCHEDULING()
         
         for i = 1:SYSTEM_NUMBER_OF_PROCESSES
            if Process_Set{1,i}.ENTRY_POINT == PCCounter
-               if Current_Process.CURRENT_PRIORITY > Process_Set{1,i}.CURRENT_PRIORITY
+               if Current_Process.CURRENT_PRIORITY >= Process_Set{1,i}.CURRENT_PRIORITY
+                   Current_Process.ENTRY_POINT = PCCounter;
                    return;
                else
                    PRO.PROCESS_STATE = PROCESS_STATE_TYPE.READY;
                    Process_Set{1,index} = PRO;
+                   INSERT_INTO_READY(Process_Set{1,index}.ID);
                    Process_Set{1,i}.PROCESS_STATE = PROCESS_STATE_TYPE.RUNNING;
                    Current_Process = Process_Set{1,i};
                    Running_Processes_set = Process_Set{1,i}.ID;
+                   DELETE_FROM_READY(Process_Set{1,i}.ID);
+                   return;
                end
            else
                 continue;

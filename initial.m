@@ -105,11 +105,8 @@ BUFFER_STATUS.MAX_NB_MESSAGE=0;
 BUFFER_STATUS.MAX_MESSAGE_SIZE=0;    
 BUFFER_STATUS.WAITING_PROCESSES=0;
   
-global DATA_ZONE
-DATA_ZONE = cell(0);
- 
 global BUFFER
-BUFFER = cell(MAX_NUMBER_OF_PROCESS);
+BUFFER = cell(0);
 
 global Blackboard_Set;
 Blackboard_Set=cell(0);
@@ -121,7 +118,7 @@ global SYSTEM_NUMBER_OF_SAMPLING_PORTS
 SYSTEM_NUMBER_OF_SAMPLING_PORTS = 0;
 
 global Sampling_Set
-Sampling_Set = cell(1,255);
+Sampling_Set = cell(0);
 
 global Sampling_obj
 Sampling_obj ={};
@@ -132,7 +129,7 @@ SPORT.EMPTY_INDICATOR=1;
 SPORT.LENGTH =5;
 
 global SAMPING_PORT
-SAMPING_PORT = cell(MAX_NUMBER_OF_PROCESS);
+SAMPING_PORT = cell(0);
 
 global Waiting_Buffer_Set 
 Waiting_Buffer_Set = cell(8,255);
@@ -163,6 +160,7 @@ MAX_PREOCESS_DELAY_TIME = 255;
 
 global MAX_BUDGET_TIME
 MAX_BUDGET_TIME = 255;
+
 ATTRIBUTES.PERIOD=[];
 ATTRIBUTES.TIME_CAPACITY=[];
 ATTRIBUTES.ENTRY_POINT=[];
