@@ -5,7 +5,7 @@ global RETURN_CODE_TYPE;
 global Blackboard_Set;
 global Current_Partition_STATUS;
 global Waiting_Timer_Set;
-global Process_Set;
+global PROCESS_SCHEDULING_FLAG ;
 global PROCESS_STATE_TYPE;
 global Waiting_Blackboard_Set;
 global Current_Process;
@@ -31,16 +31,16 @@ end
          MESSAGE_ADDR=[];
 			return;
     end 
-    s=FIND_BLACKBOARD_BYID( BLACKBOARD_ID ); 
+    index=FIND_BLACKBOARD_BYID( BLACKBOARD_ID ); 
     
-if Blackboard_Set{1,s}.EMPTY_INDICATOR == EMPTY_INDICATOR_TYPE.OCCUPIED
-          MESSAGE_ADDR=cell(1,Blackboard_Set{1,s}.LENGTH);
-    while TEMP_LENGTH< Blackboard_Set{1,s}.LENGTH
+if Blackboard_Set{1,index}.EMPTY_INDICATOR == EMPTY_INDICATOR_TYPE.OCCUPIED
+          MESSAGE_ADDR=cell(1,Blackboard_Set{1,index}.LENGTH);
+    while TEMP_LENGTH< Blackboard_Set{1,index}.LENGTH
       
-        MESSAGE_ADDR{1,TEMP_LENGTH +1}=Blackboard_Set{1,s}.MESSAGE_ADDR{1,TEMP_LENGTH +1};
+        MESSAGE_ADDR{1,TEMP_LENGTH +1}=Blackboard_Set{1,index}.MESSAGE_ADDR{1,TEMP_LENGTH +1};
         TEMP_LENGTH = TEMP_LENGTH + 1;
     end
-    LENGTH = Blackboard_Set{1,s}.LENGTH;
+    LENGTH = Blackboard_Set{1,index}.LENGTH;
 			RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
             
 			return;
@@ -57,34 +57,30 @@ elseif Current_Partition_STATUS.LOCK_LEVEL ~= 0||Current_Process.ID == ERROR_HAN
 elseif TIME_OUT == INFINITE_TIME_VALUE
     Current_Process.PROCESS_STATE = PROCESS_STATE_TYPE.WAITING;
     DELETE_FROM_RUNNING(Current_Process.ID);
-    for i=1:256
-        if isempty(Waiting_Blackboard_Set{1,i})
-            Waiting_Blackboard_Set{1,i}.ID=Current_Process.ID;
-            Waiting_Blackboard_Set{1,i}.BLACKBOARD_ID=Blackboard_Set{1,s}.ID;
-            break
-        end
-    end
+   
+   INCERT_INTO_WBlackboard( Current_Process.ID,Blackboard_Set{1,index}.ID);
+   
     INSERT_INTO_WAITING(Current_Process.ID);
-    %disp('Ask_For_Process_Scheduling');
+    PROCESS_SCHEDULING_FLAG = 1;
     
-    MESSAGE_ADDR=cell(1,Blackboard_Set{1,s}.LENGTH);
-   while TEMP_LENGTH< Blackboard_Set{1,s}.LENGTH
+    MESSAGE_ADDR=cell(1,Blackboard_Set{1,index}.LENGTH);
+   while TEMP_LENGTH< Blackboard_Set{1,index}.LENGTH
         
-        MESSAGE_ADDR{1,TEMP_LENGTH +1}=Blackboard_Set{1,s}.MESSAGE_ADDR{1,TEMP_LENGTH +1};
+        MESSAGE_ADDR{1,TEMP_LENGTH +1}=Blackboard_Set{1,index}.MESSAGE_ADDR{1,TEMP_LENGTH +1};
         TEMP_LENGTH = TEMP_LENGTH + 1;
     end
-    LENGTH = Blackboard_Set{1,s}.LENGTH;
+    LENGTH = Blackboard_Set{1,index}.LENGTH;
 			RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
             
 			return;
 else
-    MESSAGE_ADDR=cell(1,Blackboard_Set{1,s}.LENGTH);
-     while TEMP_LENGTH< Blackboard_Set{1,s}.LENGTH
+    MESSAGE_ADDR=cell(1,Blackboard_Set{1,index}.LENGTH);
+     while TEMP_LENGTH< Blackboard_Set{1,index}.LENGTH
         
-        MESSAGE_ADDR{1,TEMP_LENGTH +1}=Blackboard_Set{1,s}.MESSAGE_ADDR{1,TEMP_LENGTH +1};
+        MESSAGE_ADDR{1,TEMP_LENGTH +1}=Blackboard_Set{1,index}.MESSAGE_ADDR{1,TEMP_LENGTH +1};
         TEMP_LENGTH = TEMP_LENGTH + 1;
     end
-    LENGTH = Blackboard_Set{1,s}.LENGTH;
+    LENGTH = Blackboard_Set{1,index}.LENGTH;
 			RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
 			return;
 end

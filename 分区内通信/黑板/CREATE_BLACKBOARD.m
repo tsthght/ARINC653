@@ -51,21 +51,12 @@ end
         BBoard.MESSAGE_ADDR=cell(1,MAX_MESSAGE_SIZE);
         
         BBoard.NAME = BLACKBOARD_NAME;
-        for i=1:SYSTEM_LIMIT_NUMBER_OF_BLACKBOARDS
-        id =  round( 1+(SYSTEM_LIMIT_NUMBER_OF_BLACKBOARDS-1) *rand(1,1) );
-           if  FIND_BLACKBOARD_BYID(id)==0
-               BBoard.ID=id;
-               break
-           end
-        end
-       
-       for i=1:SYSTEM_LIMIT_NUMBER_OF_BLACKBOARDS
-         if isempty(Blackboard_Set{1,i})
-             Blackboard_Set{1,i}=BBoard;
-              break;
-         end
-        
-       end
+        BBoard.ID= GENERATE_ID( );
+          while  FIND_BLACKBOARD_BYID( BBoard.ID )~=0
+               BBoard.ID= GENERATE_ID( );     
+          end
+         
+        INSERT_INTO_Blackboard_Set( BBoard );
       	SYSTEM_NUMBER_OF_BLACKBOARDS = SYSTEM_NUMBER_OF_BLACKBOARDS + 1;
         BLACKBOARD_ID = BBoard.ID;
       	RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
