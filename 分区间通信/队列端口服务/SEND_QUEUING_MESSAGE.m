@@ -54,7 +54,7 @@ end
 if Queuing_Set{1,location}.NB_MESSAGE < Queuing_Set{1,location}.MAX_NB_MESSAGE && Queuing_Set{1,location}.WAITING_PROCESSES == 0
   
       for i = MESSAGE_ADDR:MESSAGE_ADDR+LENGTH-1
-          Queuing_Set{1,location}.LAST_MESSAGE.MESSAGE_ADDR{1,i-MESSAGE_ADDR+1} = DATA_ZONE(i);
+          Queuing_Set{1,location}.LAST_MESSAGE.MESSAGE_ADDR{1,i-MESSAGE_ADDR+1} = DATA_ZONE{1,i};
       end
       Queuing_Set{1,location}.LAST_MESSAGE.LENGTH=LENGTH;
 

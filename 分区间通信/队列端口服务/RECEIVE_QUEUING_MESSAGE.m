@@ -54,7 +54,7 @@ end
 if Queuing_Set{1,LOCATION}.NB_MESSAGE ~= 0
     
     for i = MESSAGE_ADDR:Queuing_Set{1,LOCATION}.FIRST_MESSAGE.LENGTH+MESSAGE_ADDR-1
-        DATA_ZONE(i) = Queuing_Set{1,LOCATION}.FIRST_MESSAGE.MESSAGE_ADDR{1,i-MESSAGE_ADDR+1};
+        DATA_ZONE{1,i} = Queuing_Set{1,LOCATION}.FIRST_MESSAGE.MESSAGE_ADDR{1,i-MESSAGE_ADDR+1};
     end
     
     Queuing_Set{1,LOCATION}.NB_MESSAGE = Queuing_Set{1,LOCATION}.NB_MESSAGE - 1;
@@ -98,7 +98,7 @@ else
         end
         
         for i = MESSAGE_ADDR:Queuing_Set{1,LOCATION}.FIRST_MESSAGE.LENGTH+MESSAGE_ADDR-1
-        DATA_ZONE(i) = Queuing_Set{1,LOCATION}.FIRST_MESSAGE.MESSAGE_ADDR{1,i-MESSAGE_ADDR+1};
+        DATA_ZONE{1,i}= Queuing_Set{1,LOCATION}.FIRST_MESSAGE.MESSAGE_ADDR{1,i-MESSAGE_ADDR+1};
         end
     
         Queuing_Set{1,LOCATION}.NB_MESSAGE = Queuing_Set{1,LOCATION}.NB_MESSAGE - 1;
