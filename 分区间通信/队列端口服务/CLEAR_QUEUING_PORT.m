@@ -34,11 +34,8 @@ end
 Queuing_Set{1,location}.NB_MESSAGE = 0;
 Queuing_Set{1,location}.WAITING_PROCESSES = 0;
 Queuing_Set{1,location}.QUEUE=[];
-Queuing_Set{1,location}.FIRST_MESSAGE.MESSAGE_ADDR=cell(1,Queuing_Set{1,location}.MAX_MESSAGE_SIZE);
-Queuing_Set{1,location}.FIRST_MESSAGE.LENGTH=0;
-Queuing_Set{1,location}.LAST_MESSAGE.MESSAGE_ADDR=cell(1,Queuing_Set{1,location}.MAX_MESSAGE_SIZE);
-Queuing_Set{1,location}.LAST_MESSAGE.LENGTH=0;
-
+Queuing_Set{1,location}.FIRST_MESSAGE=0;
+Queuing_Set{1,location}.LAST_MESSAGE=0;
 RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
 return;
 

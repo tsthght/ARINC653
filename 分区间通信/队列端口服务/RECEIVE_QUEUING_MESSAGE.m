@@ -2,13 +2,13 @@ function [ LENGTH,RETURN_CODE ] =  RECEIVE_QUEUING_MESSAGE( QUEUING_PORT_ID,TIME
 global RETURN_CODE_TYPE;
 global PROCESS_STATE_TYPE;
 global Queuing_Set;
-global DATA_ZONE;
 global Current_Partition_STATUS;
 global Current_Process;
 global PORT_DIRECTION_TYPE;
 global ERROR_HANDLER_PROCESS_ID;
 global INFINITE_TIME_VALUE;
 global PROCESS_SCHEDULING_FLAG;
+
 
 if INVALID_ID(QUEUING_PORT_ID)
     LENGTH=0;
@@ -53,16 +53,20 @@ end
 
 if Queuing_Set{1,LOCATION}.NB_MESSAGE ~= 0
     
-    for i = MESSAGE_ADDR:Queuing_Set{1,LOCATION}.FIRST_MESSAGE.LENGTH+MESSAGE_ADDR-1
-        DATA_ZONE{1,i} = Queuing_Set{1,LOCATION}.FIRST_MESSAGE.MESSAGE_ADDR{1,i-MESSAGE_ADDR+1};
+     LENGTH =Queuing_Set{1,LOCATION}.QUEUE{1,Queuing_Set{1,LOCATION}.FIRST_MESSAGE}.LENGTH;
+     for i=1:Queuing_Set{1,LOCATION}.QUEUE{1,Queuing_Set{1,LOCATION}.FIRST_MESSAGE}.LENGTH
+        MESSAGE_ADDR{1,i} =Queuing_Set{1,LOCATION}.QUEUE{1,Queuing_Set{1,LOCATION}.FIRST_MESSAGE}.ADDR{1,i};
     end
+     
     
+    
+    Queuing_Set{1,LOCATION}.FIRST_MESSAGE=mod(Queuing_Set{1,LOCATION}.FIRST_MESSAGE+1,Queuing_Set{1,LOCATION}.MAX_NB_MESSAGE);
     Queuing_Set{1,LOCATION}.NB_MESSAGE = Queuing_Set{1,LOCATION}.NB_MESSAGE - 1;
    	if Queuing_Set{1,LOCATION}.NB_MESSAGE==0
-        Queuing_Set{1,LOCATION}.FIRST_MESSAGE=Queuing_Set{1,LOCATION}.LAST_MESSAGE;
+        Queuing_Set{1,LOCATION}.LAST_MESSAGE = Queuing_Set{1,LOCATION}.FIRST_MESSAGE;
     end
    	    
-    LENGTH = Queuing_Set{1,LOCATION}.FIRST_MESSAGE.LENGTH;
+    
     RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
 	return;
          
@@ -97,16 +101,15 @@ else
             STOP_TIME_COUNTER(Current_Process.ID);
         end
         
-        for i = MESSAGE_ADDR:Queuing_Set{1,LOCATION}.FIRST_MESSAGE.LENGTH+MESSAGE_ADDR-1
-        DATA_ZONE{1,i}= Queuing_Set{1,LOCATION}.FIRST_MESSAGE.MESSAGE_ADDR{1,i-MESSAGE_ADDR+1};
-        end
-    
+         LENGTH =Queuing_Set{1,LOCATION}.QUEUE{1,Queuing_Set{1,LOCATION}.FIRST_MESSAGE}.LENGTH;
+       for i = 1:LENGTH
+        MESSAGE_ADDR{1,i} = Queuing_Set{1,LOCATION}.QUEUE{1,Queuing_Set{1,LOCATION}.FIRST_MESSAGE}.ADDR{1,i};
+       end
+        Queuing_Set{1,LOCATION}.FIRST_MESSAGE=mod(Queuing_Set{1,LOCATION}.FIRST_MESSAGE+1,Queuing_Set{1,LOCATION}.MAX_NB_MESSAGE);
         Queuing_Set{1,LOCATION}.NB_MESSAGE = Queuing_Set{1,LOCATION}.NB_MESSAGE - 1;
-        if Queuing_Set{1,LOCATION}.NB_MESSAGE==0
-            Queuing_Set{1,LOCATION}.FIRST_MESSAGE=Queuing_Set{1,LOCATION}.LAST_MESSAGE;
+   	    if Queuing_Set{1,LOCATION}.NB_MESSAGE==0
+         Queuing_Set{1,LOCATION}.LAST_MESSAGE = Queuing_Set{1,LOCATION}.FIRST_MESSAGE;
         end
-   	    
-        LENGTH = Queuing_Set{1,LOCATION}.FIRST_MESSAGE.LENGTH;
         RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
         return;      
                 

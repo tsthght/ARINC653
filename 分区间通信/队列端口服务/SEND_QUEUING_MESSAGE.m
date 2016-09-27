@@ -53,14 +53,18 @@ end
 
 if Queuing_Set{1,location}.NB_MESSAGE < Queuing_Set{1,location}.MAX_NB_MESSAGE && Queuing_Set{1,location}.WAITING_PROCESSES == 0
   
+       QMESSAGE.LENGTH=LENGTH;
+       QMESSAGE.ADDR=cell(1,QMESSAGE.LENGTH);
       for i = MESSAGE_ADDR:MESSAGE_ADDR+LENGTH-1
-          Queuing_Set{1,location}.LAST_MESSAGE.MESSAGE_ADDR{1,i-MESSAGE_ADDR+1} = DATA_ZONE{1,i};
+          
+          QMESSAGE.ADDR{1,i-MESSAGE_ADDR+1} = DATA_ZONE{1,i};
       end
-      Queuing_Set{1,location}.LAST_MESSAGE.LENGTH=LENGTH;
-
-      if Queuing_Set{1,location}.NB_MESSAGE==0
-        Queuing_Set{1,location}.FIRST_MESSAGE=Queuing_Set{1,location}.LAST_MESSAGE;
-      end
+      Queuing_Set{1,location}.LAST_MESSAGE=mod(Queuing_Set{1,location}.LAST_MESSAGE+1, Queuing_Set{1,location}.MAX_NB_MESSAGE);
+      Queuing_Set{1,location}.QUEUE{1,Queuing_Set{1,location}.LAST_MESSAGE}=QMESSAGE;
+       if Queuing_Set{1,location}.NB_MESSAGE==0
+           Queuing_Set{1,location}.FIRST_MESSAGE  =Queuing_Set{1,location}.LAST_MESSAGE;
+       end
+     
 
       Queuing_Set{1,location}.NB_MESSAGE = Queuing_Set{1,location}.NB_MESSAGE + 1;
       RETURN_CODE = RETURN_CODE_TYPE.NO_ERROR;
@@ -92,14 +96,17 @@ else
               RETURN_CODE = RETURN_CODE_TYPE.TIMED_OUT;
               return;
         else
+            QMESSAGE.LENGTH=LENGTH;
+            QMESSAGE.ADDR=cell(1,QMESSAGE.LENGTH);
             for i = MESSAGE_ADDR:MESSAGE_ADDR+LENGTH-1
-                Queuing_Set{1,location}.LAST_MESSAGE.MESSAGE_ADDR{1,i-MESSAGE_ADDR+1}=DATA_ZONE(i);
+          
+                QMESSAGE.ADDR{1,i-MESSAGE_ADDR+1} = DATA_ZONE{1,i};
             end
-            Queuing_Set{1,location}.LAST_MESSAGE.LENGTH=LENGTH;
+            Queuing_Set{1,location}.LAST_MESSAGE=mod(Queuing_Set{1,location}.LAST_MESSAGE+1, Queuing_Set{1,location}.MAX_NB_MESSAGE);
+            Queuing_Set{1,location}.QUEUE{1,Queuing_Set{1,location}.LAST_MESSAGE}=QMESSAGE;
             if Queuing_Set{1,location}.NB_MESSAGE==0
-                Queuing_Set{1,location}.FIRST_MESSAGE=Queuing_Set{1,location}.LAST_MESSAGE;
+               Queuing_Set{1,location}.FIRST_MESSAGE  =Queuing_Set{1,location}.LAST_MESSAGE;
             end
-  
             Queuing_Set{1,location}.NB_MESSAGE = Queuing_Set{1,location}.NB_MESSAGE + 1;
   
             if WAITING_TIME_COUNTER(Current_Process.ID)==1
