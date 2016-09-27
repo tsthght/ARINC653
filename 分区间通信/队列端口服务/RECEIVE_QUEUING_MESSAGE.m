@@ -8,6 +8,7 @@ global PORT_DIRECTION_TYPE;
 global ERROR_HANDLER_PROCESS_ID;
 global INFINITE_TIME_VALUE;
 global PROCESS_SCHEDULING_FLAG;
+global DATA_ZONE;
 
 
 if INVALID_ID(QUEUING_PORT_ID)
@@ -55,15 +56,18 @@ if Queuing_Set{1,LOCATION}.NB_MESSAGE ~= 0
     
      LENGTH =Queuing_Set{1,LOCATION}.QUEUE{1,Queuing_Set{1,LOCATION}.FIRST_MESSAGE}.LENGTH;
      for i=1:Queuing_Set{1,LOCATION}.QUEUE{1,Queuing_Set{1,LOCATION}.FIRST_MESSAGE}.LENGTH
-        MESSAGE_ADDR{1,i} =Queuing_Set{1,LOCATION}.QUEUE{1,Queuing_Set{1,LOCATION}.FIRST_MESSAGE}.ADDR{1,i};
+        DATA_ZONE{1,MESSAGE_ADDR+i-1} =Queuing_Set{1,LOCATION}.QUEUE{1,Queuing_Set{1,LOCATION}.FIRST_MESSAGE}.ADDR{1,i};
+        
     end
      
     
     
     Queuing_Set{1,LOCATION}.FIRST_MESSAGE=mod(Queuing_Set{1,LOCATION}.FIRST_MESSAGE+1,Queuing_Set{1,LOCATION}.MAX_NB_MESSAGE);
     Queuing_Set{1,LOCATION}.NB_MESSAGE = Queuing_Set{1,LOCATION}.NB_MESSAGE - 1;
+    
    	if Queuing_Set{1,LOCATION}.NB_MESSAGE==0
         Queuing_Set{1,LOCATION}.LAST_MESSAGE = Queuing_Set{1,LOCATION}.FIRST_MESSAGE;
+        
     end
    	    
     
@@ -103,7 +107,7 @@ else
         
          LENGTH =Queuing_Set{1,LOCATION}.QUEUE{1,Queuing_Set{1,LOCATION}.FIRST_MESSAGE}.LENGTH;
        for i = 1:LENGTH
-        MESSAGE_ADDR{1,i} = Queuing_Set{1,LOCATION}.QUEUE{1,Queuing_Set{1,LOCATION}.FIRST_MESSAGE}.ADDR{1,i};
+        DATA_ZONE{1,MESSAGE_ADDR+i-1} = Queuing_Set{1,LOCATION}.QUEUE{1,Queuing_Set{1,LOCATION}.FIRST_MESSAGE}.ADDR{1,i};
        end
         Queuing_Set{1,LOCATION}.FIRST_MESSAGE=mod(Queuing_Set{1,LOCATION}.FIRST_MESSAGE+1,Queuing_Set{1,LOCATION}.MAX_NB_MESSAGE);
         Queuing_Set{1,LOCATION}.NB_MESSAGE = Queuing_Set{1,LOCATION}.NB_MESSAGE - 1;
